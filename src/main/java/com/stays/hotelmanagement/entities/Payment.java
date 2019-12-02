@@ -12,27 +12,24 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name ="HBMS_PAYMENT_DETAILS")
-
 public class Payment {
 
     @Id
-    @Column(name = "PAYMENT_ID")
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String paymentId;
 
-    @Column(name = "BOOKING_ID", nullable = false)
-    private String bookingId;
+    /*@Column(nullable = false)
+    private String bookingId;*/
 
-    @Column(name = "PAY_STATUS")
     private String payStatus;
 
-    @Column(name = "PAY_AMOUNT")
+    @Column(nullable = false)
     private double payAmount;
 
-    @Column(name = "PAY_DATE")
+    @Column(nullable = false)
     private LocalDate payDate;
 
-    @Column(name = "PAY_MODE")
+    @Column(nullable = false)
     private String payMode;
-
 }
