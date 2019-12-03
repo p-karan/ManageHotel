@@ -34,14 +34,14 @@ public class Users {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    /*@Column(nullable = false)*/
     private String workLocation;
 
     @Embedded
     private Address addresses;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="userId")
+    @JoinColumn(name="userId", nullable = false)
     private Set<Booking> bookings;
 
     public enum Roles {

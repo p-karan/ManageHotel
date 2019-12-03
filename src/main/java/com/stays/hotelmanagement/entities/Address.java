@@ -15,8 +15,8 @@ import javax.persistence.GenerationType;
 @Embeddable
 public class Address {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int addressId;
+/*    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int addressId;*/
 
     @Column(nullable = false)
     private String addressBldgFlat;

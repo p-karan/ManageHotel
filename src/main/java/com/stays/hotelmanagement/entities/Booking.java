@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,21 +22,21 @@ public class Booking {
     private String bookingId;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
-    private Date bookedFromDate;
+    private LocalDate bookedFromDate;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE+1")
-    private Date bookedToDate;
+    private LocalDate bookedToDate;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
     private int daysBooked;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date checkInDateTime;
+//    @Column(nullable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime checkInDateTime;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date checkOutDateTime;
+//    @Column(nullable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime checkOutDateTime;
 
     @Column(nullable = false, precision = 10, scale = 2, columnDefinition = "FLOAT DEFAULT 0.0")
     private double bookingAmount;
@@ -58,6 +60,6 @@ public class Booking {
     private String roomId;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="bookingId")
+    @JoinColumn(name="bookingId", nullable = false)
     private Set<Payment> paymentSet;
 }

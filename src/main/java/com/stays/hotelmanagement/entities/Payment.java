@@ -27,7 +27,7 @@ public class Payment {
     private double payAmount;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
-    private Date payDate;
+    private LocalDate payDate;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
