@@ -42,7 +42,7 @@ public class Users {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="userId")
-    private Set<Bookings> bookings;
+    private Set<Booking> bookings;
 
     public enum Roles {
         ADMIN, EMPLOYEE, USER

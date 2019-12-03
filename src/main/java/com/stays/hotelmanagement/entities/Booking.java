@@ -6,22 +6,23 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name="HBMS_BOOKING_DETAILS")
-public class Bookings {
+public class Booking {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String bookingId;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private Date bookedFromDate;
 
-    @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE+1")
     private Date bookedToDate;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
@@ -55,4 +56,8 @@ public class Bookings {
 
     @Column(nullable = false)
     private String roomId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="bookingId")
+    private Set<Payment> paymentSet;
 }
