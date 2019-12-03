@@ -7,61 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-<<<<<<< HEAD
-import java.util.Set;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name ="HBMS_BOOKING_DETAILS")
-public class Booking {
-
-    @Id
-    @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String bookingId;
-
-    @Column(nullable = false)
-    private String userId;
-
-    @Column(nullable = false)
-    private String hotelId;
-
-    @Column(nullable = false)
-    private String roomId;
-
-    private int daysBooked;
-
-    @Column(nullable = false)
-    private LocalDate bookedFromDate;
-
-    @Column(nullable = false)
-    private LocalDate bookedToDate;
-
-    private LocalDateTime checkInDateTime;
-
-    private LocalDateTime checkOutDateTime;
-
-    @Column(nullable = false)
-    private int bookingAmount;
-
-    @Column(nullable = false)
-    private int noOfAdults;
-
-    private int noOfChildrens;
-
-    private String bookedBy;
-
-    private String blocked;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "BOOKING_ID", nullable = false)
-    private Set<Payment> paymentList;
-
-
-=======
-import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -84,11 +29,11 @@ public class Booking {
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
     private int daysBooked;
 
-//    @Column(nullable = false)
+    //    @Column(nullable = false)
 //    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime checkInDateTime;
 
-//    @Column(nullable = false)
+    //    @Column(nullable = false)
 //    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime checkOutDateTime;
 
@@ -116,5 +61,4 @@ public class Booking {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="bookingId", nullable = false)
     private Set<Payment> paymentSet;
->>>>>>> 60d504f1c1451239fa8449484a0e53fb70eab867
 }

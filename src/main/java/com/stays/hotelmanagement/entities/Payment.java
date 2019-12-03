@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-<<<<<<< HEAD
-=======
-import java.util.Date;
->>>>>>> 60d504f1c1451239fa8449484a0e53fb70eab867
+
 
 @Data
 @NoArgsConstructor
@@ -23,21 +20,6 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String paymentId;
 
-<<<<<<< HEAD
-    /*@Column(nullable = false)
-    private String bookingId;*/
-
-    private String payStatus;
-
-    @Column(nullable = false)
-    private double payAmount;
-
-    @Column(nullable = false)
-    private LocalDate payDate;
-
-    @Column(nullable = false)
-    private String payMode;
-=======
     @Column(nullable = false)
     private String payStatus;
 
@@ -55,5 +37,4 @@ public class Payment {
         CARD, CASH
     }
 
->>>>>>> 60d504f1c1451239fa8449484a0e53fb70eab867
 }

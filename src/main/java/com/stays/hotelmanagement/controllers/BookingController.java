@@ -57,11 +57,11 @@ public class BookingController {
     }
 
     //Find Booking details by UserId
-    @GetMapping(value = "/booking/{user}")
+  /*  @GetMapping(value = "/booking/{user}")
     public List<Booking> getAllBookingByUserId(@PathVariable("user") String userId){
 
         return this.bookingService.findBookingByUserId(userId);
-    }
+    }*/
 
     //Find Booking details by HotelId
     @GetMapping(value = "/booking/{hotel}")
@@ -86,7 +86,7 @@ public class BookingController {
 
     //Find Booking details by paymentId
     @GetMapping(value = "/booking/{payment}")
-    public Booking getAllBookingByPayentId(@PathVariable("payment") String paymentId){
+    public Booking getAllBookingByPaymentId(@PathVariable("payment") String paymentId){
 
         return this.bookingService.findBookingByPaymentId(paymentId);
     }

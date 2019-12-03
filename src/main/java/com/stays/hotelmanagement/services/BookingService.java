@@ -3,8 +3,6 @@ package com.stays.hotelmanagement.services;
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -63,9 +61,9 @@ public class BookingService {
     }
 
     //Find Booking details by UserId
-    public List<Booking> findBookingByUserId(String userId){
+    /*public List<Booking> findBookingByUserId(String userId){
         return this.bookingRepo.findAllBookingDetailsByUserId(userId);
-    }
+    }*/
 
     //Find Booking details by HotelId
     public List<Booking> findBookingByHotelId(String hotelId){
@@ -84,7 +82,7 @@ public class BookingService {
 
     //Find Booking details by paymentId
     public Booking findBookingByPaymentId(String paymentId){
-        return this.bookingRepo.findBookingDetailsByPaymentList(paymentId);
+        return this.bookingRepo.findBookingDetailsByPaymentSet(paymentId);
     }
 
 }
@@ -109,4 +107,9 @@ public class BookingService {
    delete a booking by Hotel ID
    delete a booking by Room ID
    delete a booking by Payment ID
-   Find Booking By bookingFromDate and bookingToDate*/
+   Find Booking By bookingFromDate and bookingToDate
+
+   MOBILE_NO VARCHAR2(20),
+PHONE1 VARCHAR2(20),
+PHONE2 VARCHAR2(20),
+    */
