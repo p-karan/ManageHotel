@@ -20,23 +20,23 @@ public class Users {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
     @SequenceGenerator(name="user_generator", sequenceName = "hbms_user_id_seq", allocationSize = 1)*/
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, length = 6)
     private String userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length=40)
     private String userName;
 
-    @Column(nullable = false)
+    @Column(nullable = false , length=15)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=80)
     private String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=20)
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-    /*@Column(nullable = false)*/
+    @Column(length=40)
     private String workLocation;
 
     @Embedded

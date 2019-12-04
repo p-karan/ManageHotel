@@ -23,6 +23,7 @@ public class Booking {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
     @SequenceGenerator(name="booking_generator", sequenceName = "hbms_booking_id_seq", allocationSize = 1)*/
+    @Column(length = 6)
     private String bookingId;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
@@ -31,7 +32,7 @@ public class Booking {
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE+1")
     private LocalDate bookedToDate;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1",length = 3)
     private int daysBooked;
 
     private LocalDateTime checkInDateTime;
@@ -41,22 +42,22 @@ public class Booking {
     @Column(nullable = false, precision = 10, scale = 2, columnDefinition = "FLOAT DEFAULT 0.0")
     private double bookingAmount;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1",length = 2)
     private int noOfAdults;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
     private int noOfChildrens;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String bookedBy;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String bookingStatus;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 6)
     private String hotelId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 6)
     private String roomId;
 
     @OneToMany(cascade = CascadeType.ALL)
