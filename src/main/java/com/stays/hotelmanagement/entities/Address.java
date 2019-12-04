@@ -33,4 +33,14 @@ public class Address {
     @Column(nullable = false)
     private String addressPincode;
 
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String mobileNo;
+
+    private String primaryPhone;
+
+    private String secondaryPhone;
+
 }

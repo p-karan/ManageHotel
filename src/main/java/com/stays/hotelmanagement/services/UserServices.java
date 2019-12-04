@@ -1,6 +1,7 @@
 package com.stays.hotelmanagement.services;
 import com.stays.hotelmanagement.entities.Users;
 import com.stays.hotelmanagement.repository.GenericRepository;
+import com.stays.hotelmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,10 @@ import java.util.Optional;
 public class UserServices {
 
     @Autowired
-    private GenericRepository<Users, String> userRepository;
+    private UserRepository userRepository;
 
     //Add a new User
-    public Users addUser(Users newUser){
+    public Users addUser(Users newUser) {
         return this.userRepository.save(newUser);
     }
 
