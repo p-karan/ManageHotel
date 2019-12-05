@@ -29,63 +29,63 @@ public class BookingController {
     }
 
     //Add a Booking
-    @PostMapping(value = "/booking")
+    @PostMapping(value = "/booking",produces = "application/json", consumes = "application/json")
     public Booking addBooking(@RequestBody Booking booking){
 
         return this.bookingService.addBooking(booking);
     }
 
     //Update a Booking record
-    @PutMapping(value = "/booking")
+    @PutMapping(value = "/booking",produces = "application/json", consumes = "application/json")
     public Booking updateBooking(@RequestBody Booking booking){
 
         return this.bookingService.updateBooking(booking);
     }
 
     //Delete a Booking record
-    @DeleteMapping(value = "/booking")
+    @DeleteMapping(value = "/booking",produces = "application/json", consumes = "application/json")
     public String removeBooking(@RequestBody Booking booking){
 
         return this.bookingService.deleteBooking(booking);
     }
 
     //Delete a Booking by Booking Id
-    @DeleteMapping(value = "/booking/{Id}")
+    @DeleteMapping(value = "/booking/{Id}",produces = "application/json", consumes = "application/json")
     public String removeBookingById(@PathVariable("Id") String id){
 
         return this.bookingService.deleteBookingById(id);
     }
 
     //Find Booking details by UserId
-  /*  @GetMapping(value = "/booking/{user}")
+  /*  @GetMapping(value = "/booking/user/{user}",produces = "application/json", consumes = "application/json")
     public List<Booking> getAllBookingByUserId(@PathVariable("user") String userId){
 
         return this.bookingService.findBookingByUserId(userId);
     }*/
 
     //Find Booking details by HotelId
-    @GetMapping(value = "/booking/{hotel}")
+    @GetMapping(value = "/booking/hotel/{hotel}",produces = "application/json", consumes = "application/json")
     public List<Booking> getAllBookingByHotelId(@PathVariable("hotel") String hotelId){
 
         return this.bookingService.findBookingByHotelId(hotelId);
     }
 
     //Find Booking details by RoomId
-    @GetMapping(value = "/booking/{room}")
+    @GetMapping(value = "/booking/room/{room}",produces = "application/json", consumes = "application/json")
     public List<Booking> getAllBookingByRoomId(@PathVariable("room") String roomId){
 
         return this.bookingService.findBookingByRoomId(roomId);
     }
 
     //Find Booking details between bookingFromDate and bookingToDate
-    @GetMapping(value = "/booking/{bookFrom}/{bookTo}")
+    @GetMapping(value = "/booking/date/{bookFrom}/{bookTo}",produces = "application/json", consumes = "application/json")
     public List<Booking> getAllBookingByDateRange(@PathVariable("bookFrom") LocalDate bookedFromDate, @PathVariable("bookTo")LocalDate bookedToDate){
 
         return this.bookingService.findBookingByDateRange(bookedFromDate,bookedToDate);
     }
 
     //Find Booking details by paymentId
-    @GetMapping(value = "/booking/{payment}")
+    @GetMapping(value = "/booking/payment/{payment}",produces = "application/json", consumes = "application/json")
     public Booking getAllBookingByPaymentId(@PathVariable("payment") String paymentId){
 
         return this.bookingService.findBookingByPaymentId(paymentId);
