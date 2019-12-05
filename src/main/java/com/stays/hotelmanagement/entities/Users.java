@@ -16,10 +16,10 @@ import java.util.Set;
 public class Users {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
-    @SequenceGenerator(name="user_generator", sequenceName = "hbms_user_id_seq", allocationSize = 1)*/
+    /*@GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")*/
+    /*@GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_ID_GENERATOR")
+    @SequenceGenerator(name="USER_ID_GENERATOR", sequenceName = "HBMS_USER_ID_SEQ")*/
     @Column(nullable = false, length = 6)
     private String userId;
 
