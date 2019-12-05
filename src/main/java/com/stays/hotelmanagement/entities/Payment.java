@@ -3,6 +3,7 @@ package com.stays.hotelmanagement.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,7 +18,9 @@ public class Payment {
 
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String paymentId;
 
     @Column(nullable = false)
@@ -36,5 +39,4 @@ public class Payment {
     public enum paymentModes {
         CARD, CASH
     }
-
 }
