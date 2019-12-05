@@ -14,14 +14,15 @@ public class UserController {
     private UserServices userService;
 
     //Add a new User
-    @PostMapping(value="/user")
-    public Users addUser(Users newUser){
+    @PostMapping(value="/user", produces = "application/json", consumes = "application/json")
+    public Users addUser(@RequestBody Users newUser){
+
         return this.userService.addUser(newUser);
     }
 
     //Update an existing User
-    @PutMapping(value = "/user")
-    public Users updateUser(Users existingUser){
+    @PutMapping(value = "/user",  produces = "application/json", consumes = "application/json")
+    public Users updateUser(@RequestBody Users existingUser){
         return this.userService.updateUser(existingUser);
     }
 
@@ -32,26 +33,26 @@ public class UserController {
     }
 
     //Find User by User_Id
-    @GetMapping(value = "user/{userId}")
-    public Users getUserById(@PathVariable("userId") String userId){
+    @GetMapping(value = "/user/userId", params = "userId")
+    public Users getUserById(@RequestParam("userId") String userId){
         return this.userService.getUserById(userId);
     }
 
     //Find User by User_Name
-    @GetMapping(value="user/{userName}")
-    public Users getUserByUserName(@PathVariable("userName") String userName){
+    @GetMapping(value="user/userName", params = "userName")
+    public Users getUserByUserName(@RequestParam("userName") String userName){
         return this.userService.getUserByUserName(userName);
     }
 
-    //Delete User by User_Id
+    /*//Delete User by User_Id
     @DeleteMapping(value = "user/{userId}")
     public String deleteUserById(@PathVariable("userId") String userId){
         return this.userService.deleteUserById(userId);
-    }
+    }*/
 
     //Delete User by User_Name
     @DeleteMapping(value = "user/{userName}")
     public String deleteUserByName(@PathVariable("userName") String userName){
-        return this.userService.deleteUserByName(userName);
+        return this.userService.deleteUserByUserName(userName);
     }
 }
