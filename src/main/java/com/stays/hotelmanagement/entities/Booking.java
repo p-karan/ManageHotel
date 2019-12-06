@@ -61,6 +61,8 @@ public class Booking {
     @Column(nullable = false)
     private String roomId;
 
+    private String userId;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="bookingId", nullable = false)
     private Set<Payment> paymentSet;

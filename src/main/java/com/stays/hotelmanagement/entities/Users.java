@@ -40,9 +40,9 @@ public class Users {
     @Embedded
     private Address addresses;
 
-    @OneToMany(cascade = CascadeType.ALL)
+   /* @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="userId", nullable = false)
-    private Set<Booking> bookings;
+    private Set<Booking> bookings;*/
 
     public enum Roles {
         ADMIN, EMPLOYEE, USER

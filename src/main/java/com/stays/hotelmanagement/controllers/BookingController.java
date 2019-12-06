@@ -57,37 +57,37 @@ public class BookingController {
     }
 
     //Find Booking details by UserId
-  /*  @GetMapping(value = "/booking/user/{user}",produces = "application/json", consumes = "application/json")
+    @GetMapping(value = "/booking/user/{user}")
     public List<Booking> getAllBookingByUserId(@PathVariable("user") String userId){
 
         return this.bookingService.findBookingByUserId(userId);
-    }*/
+    }
 
     //Find Booking details by HotelId
-    @GetMapping(value = "/booking/hotel/{hotel}",produces = "application/json", consumes = "application/json")
+    @GetMapping(value = "/booking/hotel/{hotel}")
     public List<Booking> getAllBookingByHotelId(@PathVariable("hotel") String hotelId){
 
         return this.bookingService.findBookingByHotelId(hotelId);
     }
 
     //Find Booking details by RoomId
-    @GetMapping(value = "/booking/room/{room}",produces = "application/json", consumes = "application/json")
+    @GetMapping(value = "/booking/room/{room}")
     public List<Booking> getAllBookingByRoomId(@PathVariable("room") String roomId){
 
         return this.bookingService.findBookingByRoomId(roomId);
     }
 
     //Find Booking details between bookingFromDate and bookingToDate
-    @GetMapping(value = "/booking/date/{bookFrom}/{bookTo}",produces = "application/json", consumes = "application/json")
+    @GetMapping(value = "/booking/date/{bookFrom}/{bookTo}")
     public List<Booking> getAllBookingByDateRange(@PathVariable("bookFrom") LocalDate bookedFromDate, @PathVariable("bookTo")LocalDate bookedToDate){
 
         return this.bookingService.findBookingByDateRange(bookedFromDate,bookedToDate);
     }
 
     //Find Booking details by paymentId
-    @GetMapping(value = "/booking/payment/{payment}",produces = "application/json", consumes = "application/json")
-    public Booking getAllBookingByPaymentId(@PathVariable("payment") String paymentId){
-
-        return this.bookingService.findBookingByPaymentId(paymentId);
-    }
+//    @GetMapping(value = "/booking/payment/{payment}")
+//    public Booking getAllBookingByPaymentId(@PathVariable("payment") String paymentId){
+//
+//        return this.bookingService.findBookingByPaymentId(paymentId);
+//    }
 }

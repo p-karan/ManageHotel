@@ -10,13 +10,13 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, String> {
 
-//    public List<Booking> findAllBookingDetailsByUserId(String userId);
+    public List<Booking> findAllBookingDetailsByUserId(String userId);
 
     public List<Booking> findAllBookingDetailsByHotelId(String hotelId);
 
     public List<Booking> findAllBookingDetailsByRoomId(String roomId);
 
-    public Booking findBookingDetailsByPaymentSet(String paymentId);
+//    public Booking findBookingDetailsByPaymentSet(String paymentId);
 
     public List<Booking> findAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);
 

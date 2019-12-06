@@ -22,7 +22,6 @@ public class BookingService {
 
     //Find Booking details by BookingId
     public Booking findBookingById(String bookingId){
-
         Booking bookingById = new Booking();
         Optional<Booking> booking = this.bookingRepo.findById(bookingId);
         if(booking.isPresent())
@@ -61,9 +60,9 @@ public class BookingService {
     }
 
     //Find Booking details by UserId
-    /*public List<Booking> findBookingByUserId(String userId){
+    public List<Booking> findBookingByUserId(String userId){
         return this.bookingRepo.findAllBookingDetailsByUserId(userId);
-    }*/
+    }
 
     //Find Booking details by HotelId
     public List<Booking> findBookingByHotelId(String hotelId){
@@ -80,11 +79,11 @@ public class BookingService {
         return this.bookingRepo.findAllBookingDetailsByBookedByBetween(bookedFromDate, bookedToDate);
     }
 
-    //Find Booking details by paymentId
+   /* //Find Booking details by paymentId
     public Booking findBookingByPaymentId(String paymentId){
         return this.bookingRepo.findBookingDetailsByPaymentSet(paymentId);
     }
-
+*/
 }
 
 
