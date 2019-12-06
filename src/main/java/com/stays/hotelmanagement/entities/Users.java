@@ -18,7 +18,7 @@ public class Users {
     @Id
     /*@GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")*/
-    /*@GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_ID_GENERATOR")
+ /* @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_ID_GENERATOR")
     @SequenceGenerator(name="USER_ID_GENERATOR", sequenceName = "HBMS_USER_ID_SEQ")*/
     @Column(nullable = false, length = 6)
     private String userId;
@@ -42,9 +42,9 @@ public class Users {
     @Embedded
     private Address addresses;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="userId", nullable = false, insertable = false, updatable = false)
-    private Set<Booking> bookings;
+    /*@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="userId", nullable = false)
+    private Set<Booking> bookings;*/
 
     public enum Roles {
         ADMIN, EMPLOYEE, USER

@@ -33,14 +33,14 @@ public class UserController {
     }
 
     //Find User by User_Id
-    @GetMapping(value = "/user/userId", params = "userId")
-    public Users getUserById(@RequestParam("userId") String userId){
+    @GetMapping(value = "/user/userId/{id}")
+    public Users getUserById(@PathVariable("id") String userId){
         return this.userService.getUserById(userId);
     }
 
     //Find User by User_Name
-    @GetMapping(value="user/userName", params = "userName")
-    public Users getUserByUserName(@RequestParam("userName") String userName){
+    @GetMapping(value="user/userName/{userName}")
+    public Users getUserByUserName(@PathVariable("userName") String userName){
         return this.userService.getUserByUserName(userName);
     }
 

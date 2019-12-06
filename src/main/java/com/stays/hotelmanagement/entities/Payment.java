@@ -18,8 +18,8 @@ public class Payment {
 
     @Id
     @Column(unique = true, length=6)
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+   /* @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")*/
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE)*/
     private String paymentId;
 

@@ -1,0 +1,36 @@
+**************************************************************************************************
+This File holds all SQL related constructs [SEQUENCE, TRIGGER, TABLE DDL's] used in this project.
+**************************************************************************************************
+
+// ENTITY : Users >> TABLE : HBMS_USERS //
+
+**After table HBMS_USERS is created by JPA [Project is compiled]
+**Run below SEQUENCE and TRIGGER in DB.
+1.
+CREATE SEQUENCE  HBMS_USER_ID_SEQ
+MINVALUE 1000
+MAXVALUE 9999
+INCREMENT BY 1
+START WITH 1000
+NOCACHE
+NOORDER
+NOCYCLE;
+/
+
+2.
+CREATE OR REPLACE TRIGGER "HBMS_USER_ID_BEFORE_INSERT"
+BEFORE INSERT ON HBMS_USERS
+FOR EACH ROW
+DECLARE
+BEGIN
+    IF :NEW.USER_ID IS NULL THEN
+        :NEW.USER_ID := 'UG'||HBMS_USER_ID_SEQ.nextval;
+    END IF;
+END;
+/
+
+3. In case you want to DROP tables and re-run compilation, use below.
+
+DROP TABLE HBMS_USERS;
+DROP TABLE HBMS_BOOKING_DETAILS;
+DROP TABLE HBMS_PAYMENT_DETAILS;
