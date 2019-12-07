@@ -1,11 +1,19 @@
 **************************************************************************************************
 This File holds all SQL related constructs [SEQUENCE, TRIGGER, TABLE DDL's] used in this project.
 **************************************************************************************************
+// GENERAL.
+** In case you want to DROP tables and re-run compilation, use below.
+
+DROP TABLE HBMS_USERS;
+DROP TABLE HBMS_BOOKING_DETAILS;
+DROP TABLE HBMS_PAYMENT_DETAILS;
+DROP SEQUENCE HBMS_USER_ID_SEQ;
+
 
 // ENTITY : Users >> TABLE : HBMS_USERS //
 
-**After table HBMS_USERS is created by JPA [Project is compiled]
-**Run below SEQUENCE and TRIGGER in DB.
+** After table HBMS_USERS is created by JPA [Project is compiled]
+** Run below SEQUENCE and TRIGGER in DB.
 1.
 CREATE SEQUENCE  HBMS_USER_ID_SEQ
 MINVALUE 1000
@@ -29,8 +37,11 @@ BEGIN
 END;
 /
 
-3. In case you want to DROP tables and re-run compilation, use below.
-
-DROP TABLE HBMS_USERS;
-DROP TABLE HBMS_BOOKING_DETAILS;
-DROP TABLE HBMS_PAYMENT_DETAILS;
+3. INSERT QUERIES.
+#a.
+Insert into HBMS_USERS
+(USER_ID, USER_NAME,PASSWORD, ROLE, FULL_NAME, ADDRESS_BLDG_FLAT, ADDRESS_STREET, ADDRESS_CITY, ADDRESS_PINCODE, ADDRESS_STATE,
+EMAIL, MOBILE_NO, PRIMARY_PHONE, SECONDARY_PHONE, WORK_LOCATION)
+values
+('','harshad_t','test123','ADMIN','Harshad Tawade','108-Ashtavinayak CHS','Samta Colony, Pantnagar, Ghatkopar [East]','Mumbai','400075','Maharashtra',
+'tawade.harshad@gmail.com','9819865318','21028337',null,'Mumbai');
