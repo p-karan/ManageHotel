@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,19 +23,25 @@ public class UserServices {
     }
 
     //Check user exists, before updating.
-    public boolean checkUserExist(String userName) {
-        boolean isUserPresent = false;
-        Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(userName));
+    public int checkUserExist(String checkUser) {
+ /*       boolean isUserPresent = false;
+        Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(checkUser));
         if (user.isPresent()) {
             isUserPresent = true;
         }
-        return isUserPresent;
+        return isUserPresent;*/
+
+        //Users userFoundById = new Users();
+        ArrayList<Users> userList = (ArrayList<Users>) getAllUsers();
+       // int userFound = userList.indexOf(checkUser);
+        int userFound = userList.indexOf(checkUser);
+        System.out.println(userFound+"Fake");
+        return userFound;
     }
 
     //Update an existing User
-    public boolean updateUser(Users existingUser) {
-        this.userRepository.save(existingUser);
-        return true;
+    public Users updateUser(Users existingUser) {
+        return this.userRepository.save(existingUser);
     }
 
     //Find All Users
@@ -44,8 +51,15 @@ public class UserServices {
 
     //Find User by User_Id
     public Users getUserById(String userId) {
-        Users userFoundById = new Users();
-        Optional<Users> user = this.userRepository.findById(userId);
+        Users userFoundById;
+        int userFound=checkUserExist(userId);
+        if(userFound!=0){
+            userFoundById = this.userRepository.findById(userId).get();
+        }else{
+            userFoundById = new Users();
+        }
+
+        /*Optional<Users> user = this.userRepository.findById(userId);
         log.info("User entered :" + userId);
         log.info("DB returned :" + userId);
         if (user.isPresent()) {
@@ -54,12 +68,29 @@ public class UserServices {
             // Add logic to check for null user.
         }
         log.info(String.valueOf(userFoundById));
+        return userFoundById;*/
+
+        /*boolean isUserPresent=checkUserExist(userId);
+        System.out.println(isUserPresent);
+        if(isUserPresent){
+            userFoundById = this.userRepository.findById(userId).get();
+        }*/
         return userFoundById;
     }
 
     //Find User by User_Name
     public Users getUserByUserName(String userName) {
-        Users userFoundByUserName = new Users();
+        Users userFoundByUserName=new Users();
+        int userFound=checkUserExist(userName);
+        if(userFound!=0){
+            userFoundByUserName = this.userRepository.findUsersByUserName(userName);
+        }
+
+
+
+
+
+/*        Users userFoundByUserName = new Users();
         Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(userName));
         log.info("User entered :" + userName);
         log.info("DB returned :" + userName);
@@ -68,7 +99,7 @@ public class UserServices {
         } else {
             // Add logic to check for null user.
         }
-        log.info(String.valueOf(userFoundByUserName));
+        log.info(String.valueOf(userFoundByUserName));*/
         return userFoundByUserName;
     }
 
@@ -85,14 +116,16 @@ public class UserServices {
     }*/
     
     //Delete User 
-    public boolean deleteUserbyUserName(String userName) {
-        boolean isdeleteSuccessfull = false;
-        Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(userName));
-        this.userRepository.deleteById(user.get().getUserId());
-        boolean isPresent = this.userRepository.existsById(user.get().getUserId());
-        if(!isPresent){
-            isdeleteSuccessfull = true;
+    public boolean deleteUserByUserId(String userId) {
+        boolean isDeleteSuccessful = false;
+        int userFound=checkUserExist(userId);
+        if(userFound!=0){
+            this.userRepository.deleteById(userId);
+            boolean isUserPresent=this.userRepository.existsById(userId);
+            if(!isUserPresent){
+                isDeleteSuccessful=true;
+            }
         }
-        return isdeleteSuccessfull;
+        return isDeleteSuccessful;
     }
 }

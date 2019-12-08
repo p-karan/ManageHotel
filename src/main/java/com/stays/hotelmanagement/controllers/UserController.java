@@ -21,18 +21,8 @@ public class UserController {
 
     //Update an existing User
     @PutMapping(value = "/user", produces = "application/json", consumes = "application/json")
-    public String updateUser(@RequestBody Users existingUser) {
-        String usertoUpdate = existingUser.getUserName();
-        String userNotFound = "User : " + usertoUpdate + " not found";
-        String updateStatus = "User record updated successfully.";
-
-        boolean isUserPresent = this.userService.checkUserExist(usertoUpdate);
-        if (isUserPresent) {
-            this.userService.updateUser(existingUser);
-        } else {
-            return userNotFound;
-        }
-        return updateStatus;
+    public Users updateUser(@RequestBody Users existingUser) {
+        return this.userService.updateUser(existingUser);
     }
 
     //Find All Users
@@ -60,21 +50,17 @@ public class UserController {
     }*/
 
     //Delete User by User_Name
-    @DeleteMapping(value = "user/{userName}")
-    public String deleteUserByName(@PathVariable("userName") String userName) {
-        String userNotFound = "User : " + userName + " not found";
+    @DeleteMapping(value = "user/{userId}")
+    public String deleteUserById(@PathVariable("userId") String userId) {
+        //String userNotFound = "User : " + userName + " not found";
         String deleteSuccess = "User record deleted successfully.";
         String deleteFailure = "Delete operation failed.";
-        boolean isUserPresent = this.userService.checkUserExist(userName);
-        if (isUserPresent) {
-            boolean isdeleteSuccessFul = this.userService.deleteUserbyUserName(userName);
-            if (isdeleteSuccessFul) {
+        boolean isDeleteSuccessful = this.userService.deleteUserByUserId(userId);
+        if (isDeleteSuccessful) {
                 return deleteSuccess;
-            } else {
-                return deleteFailure;
             }
-        } else {
-            return userNotFound;
+        else {
+            return deleteFailure;
         }
     }
 }
