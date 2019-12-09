@@ -85,14 +85,14 @@ public class UserServices {
     }*/
     
     //Delete User 
-    public boolean deleteUserbyUserName(String userName) {
-        boolean isdeleteSuccessfull = false;
+    public boolean deleteUserByUserName(String userName) {
+        boolean isDeleteSuccessful = false;
         Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(userName));
         this.userRepository.deleteById(user.get().getUserId());
         boolean isPresent = this.userRepository.existsById(user.get().getUserId());
         if(!isPresent){
-            isdeleteSuccessfull = true;
+            isDeleteSuccessful = true;
         }
-        return isdeleteSuccessfull;
+        return isDeleteSuccessful;
     }
 }

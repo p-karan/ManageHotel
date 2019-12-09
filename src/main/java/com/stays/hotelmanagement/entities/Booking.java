@@ -1,5 +1,6 @@
 package com.stays.hotelmanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,8 @@ import java.util.Set;
 public class Booking {
 
     @Id
-    /*@GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")*/
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
-    @SequenceGenerator(name="booking_generator", sequenceName = "hbms_booking_id_seq", allocationSize = 1)*/
+    @SequenceGenerator(name="booking_generator", sequenceName = "hbms_booking_id_seq")*/
     @Column(length = 6)
     private String bookingId;
 
@@ -63,10 +62,10 @@ public class Booking {
     @Column(nullable = false, length = 6)
     private String userId;
 
-    @Column(nullable = false, unique = true, length=40)
+    @Column(nullable = false, length=40)
     private String userName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="bookingId", nullable = false)
+    @JoinColumn(name="bookingId", nullable = false, insertable=false, updatable = false)
     private Set<Payment> paymentSet;
 }

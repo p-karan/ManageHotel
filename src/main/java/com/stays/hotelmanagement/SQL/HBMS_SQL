@@ -9,7 +9,7 @@ DROP TABLE HBMS_BOOKING_DETAILS;
 DROP TABLE HBMS_PAYMENT_DETAILS;
 DROP SEQUENCE HBMS_USER_ID_SEQ;
 
-
+=======================================================================================================================
 // ENTITY : Users >> TABLE : HBMS_USERS //
 
 ** After table HBMS_USERS is created by JPA [Project is compiled]
@@ -45,3 +45,59 @@ EMAIL, MOBILE_NO, PRIMARY_PHONE, SECONDARY_PHONE, WORK_LOCATION)
 values
 ('','harshad_t','test123','ADMIN','Harshad Tawade','108-Ashtavinayak CHS','Samta Colony, Pantnagar, Ghatkopar [East]','Mumbai','400075','Maharashtra',
 'tawade.harshad@gmail.com','9819865318','21028337',null,'Mumbai');
+
+=======================================================================================================================
+// ENTITY : Booking >> TABLE : HBMS_BOOKING_DETAILS //
+
+** Run below SEQUENCE and TRIGGER in DB.
+
+1.
+CREATE SEQUENCE  HBMS_BOOKING_ID_SEQ
+MINVALUE 1000
+MAXVALUE 9999
+INCREMENT BY 1
+START WITH 1000
+NOCACHE
+NOORDER
+NOCYCLE;
+/
+
+2.
+CREATE OR REPLACE TRIGGER "HBMS_BOOKING_ID_BEFORE_INSERT"
+BEFORE INSERT ON HBMS_BOOKING
+FOR EACH ROW
+DECLARE
+BEGIN
+    IF :NEW.BOOKING_ID IS NULL THEN
+        :NEW.BOOKING_ID := 'BO'||HBMS_BOOKING_ID_SEQ.nextval;
+    END IF;
+END;
+/
+
+==============================================================================================================================
+// ENTITY : Booking >> TABLE : HBMS_BOOKING_DETAILS //
+
+** Run below SEQUENCE and TRIGGER in DB.
+
+1.
+CREATE SEQUENCE  HBMS_PAYMENT_ID_SEQ
+MINVALUE 1000
+MAXVALUE 9999
+INCREMENT BY 1
+START WITH 1000
+NOCACHE
+NOORDER
+NOCYCLE;
+/
+
+2.
+CREATE OR REPLACE TRIGGER "HBMS_PAYMENT_ID_BEFORE_INSERT"
+BEFORE INSERT ON HBMS_PAYMENT
+FOR EACH ROW
+DECLARE
+BEGIN
+    IF :NEW.PAYMENT_ID IS NULL THEN
+        :NEW.PAYMENT_ID := 'PA'||HBMS_PAYMENT_ID_SEQ.nextval;
+    END IF;
+END;
+/

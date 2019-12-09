@@ -67,7 +67,7 @@ public class UserController {
         String deleteFailure = "Delete operation failed.";
         boolean isUserPresent = this.userService.checkUserExist(userName);
         if (isUserPresent) {
-            boolean isdeleteSuccessFul = this.userService.deleteUserbyUserName(userName);
+            boolean isdeleteSuccessFul = this.userService.deleteUserByUserName(userName);
             if (isdeleteSuccessFul) {
                 return deleteSuccess;
             } else {

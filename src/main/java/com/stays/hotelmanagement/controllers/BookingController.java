@@ -52,7 +52,6 @@ public class BookingController {
     //Delete a Booking by Booking Id
     @DeleteMapping(value = "/booking/{Id}",produces = "application/json", consumes = "application/json")
     public String removeBookingById(@PathVariable("Id") String id){
-
         return this.bookingService.deleteBookingById(id);
     }
 
@@ -63,7 +62,7 @@ public class BookingController {
         return this.bookingService.findBookingByUserId(userId);
     }
 
-    //Find Booking details by HotelId
+        //Find Booking details by HotelId
     @GetMapping(value = "/booking/hotel/{hotel}")
     public List<Booking> getAllBookingByHotelId(@PathVariable("hotel") String hotelId){
 

@@ -51,7 +51,7 @@ public class BookingService {
 
     //Delete a Booking by Booking Id
     public String deleteBookingById(String bookingId){
-        String message = "No booking exists with " + bookingId;
+        String message = "No booking exists with Id : " + bookingId;
         if(this.bookingRepo.existsById(bookingId)){
             message = "Booking deleted by Id: "+bookingId;
             this.bookingRepo.deleteById(bookingId);
