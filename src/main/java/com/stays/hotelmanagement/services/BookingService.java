@@ -13,75 +13,65 @@ import java.util.Optional;
 public class BookingService {
 
     @Autowired
-    private BookingRepository bookingRepo;
+    private BookingRepository bookingRepository;
 
     //Find all Booking details
     public List<Booking> getAllBooking(){
-        return this.bookingRepo.findAll();
+        return this.bookingRepository.findAll();
     }
 
     //Find Booking details by BookingId
-    public Booking findBookingById(String bookingId){
-        Booking bookingById = new Booking();
-        Optional<Booking> booking = this.bookingRepo.findById(bookingId);
-        if(booking.isPresent())
-            bookingById = booking.get();
-        return bookingById;
+    public Booking getBookingById(Integer bookingId){
+
+        Booking bookingFoundById = new Booking();
+        Optional<Booking> booking = this.bookingRepository.findByBookingId(bookingId);
+        if(booking.isPresent()) {
+            bookingFoundById = booking.get();
+        }else{
+            // Add logic to check for null user.
+        }
+        return bookingFoundById;
     }
 
     //Add a Booking
     public Booking addBooking(Booking booking){
-        return this.bookingRepo.save(booking);
+        return this.bookingRepository.save(booking);
     }
 
     //Update a Booking record
     public Booking updateBooking(Booking booking){
-        return this.bookingRepo.save(booking);
+        return this.bookingRepository.save(booking);
     }
 
-    //Delete a Booking
-    public String deleteBooking(Booking booking){
-        String message = "No Such booking exists!!!";
-        if(this.bookingRepo.existsById(booking.getBookingId())){
-            message = "Booking deleted by Id: "+booking.getBookingId();
-            this.bookingRepo.delete(booking);
+    //Delete a booking using  booking Id.
+    public String deleteBookingById(Integer bookingId){
+        String result = "Booking : " + bookingId + " not found.";
+        Boolean isBookingAvailable=this.bookingRepository.existsByBookingId(bookingId);
+
+        if(isBookingAvailable){
+            this.bookingRepository.deleteByBookingId(bookingId);
+            result = "User : " + bookingId + " deleted.";
         }
-        return message;
-    }
-
-    //Delete a Booking by Booking Id
-    public String deleteBookingById(String bookingId){
-        String message = "No booking exists with " + bookingId;
-        if(this.bookingRepo.existsById(bookingId)){
-            message = "Booking deleted by Id: "+bookingId;
-            this.bookingRepo.deleteById(bookingId);
-        }
-        return message;
-    }
-
-    //Find Booking details by UserId
-    public List<Booking> findBookingByUserId(String userId){
-        return this.bookingRepo.findAllBookingDetailsByUserId(userId);
+        return result;
     }
 
     //Find Booking details by HotelId
     public List<Booking> findBookingByHotelId(String hotelId){
-        return this.bookingRepo.findAllBookingDetailsByHotelId(hotelId);
+        return this.bookingRepository.findAllBookingDetailsByHotelId(hotelId);
     }
 
     //Find Booking details by RoomId
     public List<Booking> findBookingByRoomId(String roomId){
-        return this.bookingRepo.findAllBookingDetailsByRoomId(roomId);
+        return this.bookingRepository.findAllBookingDetailsByRoomId(roomId);
     }
 
     //Find Booking details between bookingFromDate and bookingToDate
     public List<Booking> findBookingByDateRange(LocalDate bookedFromDate, LocalDate bookedToDate){
-        return this.bookingRepo.findAllBookingDetailsByBookedByBetween(bookedFromDate, bookedToDate);
+        return this.bookingRepository.findAllBookingDetailsByBookedByBetween(bookedFromDate, bookedToDate);
     }
 
-   /* //Find Booking details by paymentId
+    /*//Find Booking details by paymentId
     public Booking findBookingByPaymentId(String paymentId){
-        return this.bookingRepo.findBookingDetailsByPaymentSet(paymentId);
-    }
-*/
+        return this.bookingRepository.findBookingDetailsByPaymentSet(paymentId);
+    }*/
 }

@@ -21,18 +21,8 @@ public class UserController {
 
     //Update an existing User
     @PutMapping(value = "/user", produces = "application/json", consumes = "application/json")
-    public String updateUser(@RequestBody Users existingUser) {
-        String usertoUpdate = existingUser.getUserName();
-        String userNotFound = "User : " + usertoUpdate + " not found";
-        String updateStatus = "User record updated successfully.";
-
-        boolean isUserPresent = this.userService.checkUserExist(usertoUpdate);
-        if (isUserPresent) {
-            this.userService.updateUser(existingUser);
-        } else {
-            return userNotFound;
-        }
-        return updateStatus;
+    public Users updateUser(@RequestBody Users existingUser) {
+        return this.userService.updateUser(existingUser);
     }
 
     //Find All Users
@@ -43,7 +33,7 @@ public class UserController {
 
     //Find User by User_Id
     @GetMapping(value = "/user/userId/{id}")
-    public Users getUserById(@PathVariable("id") String userId) {
+    public Users getUserById(@PathVariable("id") int userId) {
         return this.userService.getUserById(userId);
     }
 
@@ -53,21 +43,21 @@ public class UserController {
         return this.userService.getUserByUserName(userName);
     }
 
-    /*//Delete User by User_Id
-    @DeleteMapping(value = "user/{userId}")
-    public String deleteUserById(@PathVariable("userId") String userId){
-        return this.userService.deleteUserById(userId);
-    }*/
+    //Delete User by User_Id
+    @DeleteMapping(value = "user/")
+    public Users deleteUser(@RequestBody Users existingUser){
+        return this.userService.deleteUser(existingUser);
+    }
 
     //Delete User by User_Name
-    @DeleteMapping(value = "user/{userName}")
+    /*@DeleteMapping(value = "user/{userName}")
     public String deleteUserByName(@PathVariable("userName") String userName) {
         String userNotFound = "User : " + userName + " not found";
         String deleteSuccess = "User record deleted successfully.";
         String deleteFailure = "Delete operation failed.";
         boolean isUserPresent = this.userService.checkUserExist(userName);
         if (isUserPresent) {
-            boolean isdeleteSuccessFul = this.userService.deleteUserbyUserName(userName);
+            boolean isdeleteSuccessFul = this.userService.deleteUserByUserName(userName);
             if (isdeleteSuccessFul) {
                 return deleteSuccess;
             } else {
@@ -76,5 +66,5 @@ public class UserController {
         } else {
             return userNotFound;
         }
-    }
+    }*/
 }
