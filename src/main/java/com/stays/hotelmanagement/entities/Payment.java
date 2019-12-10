@@ -15,8 +15,9 @@ import java.time.LocalDate;
 public class Payment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(length=6)
-    private String paymentId;
+    private int paymentId;
 
     @Column(nullable = false, length=40)
     private String payStatus;

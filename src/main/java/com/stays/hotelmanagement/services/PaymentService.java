@@ -20,9 +20,9 @@ public class PaymentService {
     }
 
     //Check if a particular paymentId exists.
-    public boolean checkPaymentExist(String paymentId) {
+    public boolean checkPaymentExist(int paymentId) {
         boolean isPaymentIdPresent = false;
-        Optional<Payment> paymentFound = this.paymentRepository.findById(paymentId);
+        Optional<Payment> paymentFound = this.paymentRepository.findByPaymentId(paymentId);
         if (paymentFound.isPresent()) {
             isPaymentIdPresent = true;
         }
@@ -54,12 +54,12 @@ public class PaymentService {
     }
 
     //Delete a payment
-    public boolean deletePayment(String paymentId) {
+    public boolean deletePayment(int paymentId) {
         boolean isDeleteSuccessful = false;
         boolean isPaymentIdPresent = this.checkPaymentExist(paymentId);
         if (isPaymentIdPresent) {
-            this.paymentRepository.deleteById(paymentId);
-            boolean isPaymentAvailable = this.paymentRepository.existsById(paymentId);
+            this.paymentRepository.deleteByPaymentId(paymentId);
+            boolean isPaymentAvailable = this.paymentRepository.existsByPaymentId(paymentId);
             if (!isPaymentAvailable) {
                 isDeleteSuccessful = true;
             }
