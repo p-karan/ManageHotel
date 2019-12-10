@@ -21,25 +21,25 @@ public class BookingController {
 
     //Find Booking details by BookingId
     @GetMapping(value = "/booking/{bookingId}")
-    public Booking getBookingById(@PathVariable("bookingId") String bookingId){
+    public Booking getBookingById(@PathVariable("bookingId") Integer bookingId){
         return this.bookingService.getBookingById(bookingId);
     }
 
     //Add a Booking
-    @PostMapping(value = "/booking")
-    public Booking addBooking(Booking booking){
+    @PostMapping(value = "/booking", produces = "application/json", consumes = "application/json")
+    public Booking addBooking(@RequestBody Booking booking){
         return this.bookingService.addBooking(booking);
     }
 
     //Update a Booking record
-    @PutMapping(value = "/booking")
-    public Booking updateBooking(Booking booking){
+    @PutMapping(value = "/booking" , produces = "application/json", consumes = "application/json")
+    public Booking updateBooking(@RequestBody Booking booking){
         return this.bookingService.addBooking(booking);
     }
 
     //Delete a booking using  booking Id.
     @DeleteMapping(value="/booking/{bookingId}")
-    public String deleteBookingById(@PathVariable("bookingId") String bookingId){
+    public String deleteBookingById(@PathVariable("bookingId") Integer bookingId){
         return this.bookingService.deleteBookingById(bookingId);
     }
 }

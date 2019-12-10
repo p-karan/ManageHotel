@@ -45,7 +45,7 @@ public class PaymentController {
 
     //Delete a payment
     @DeleteMapping(value = "/payment/{paymentId}")
-    public boolean deletePayment(@PathVariable("paymentId") String paymentId){
+    public boolean deletePayment(@PathVariable("paymentId") Integer paymentId){
         return this.paymentService.deletePayment(paymentId);
     }
 }

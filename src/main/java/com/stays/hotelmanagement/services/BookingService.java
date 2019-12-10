@@ -21,10 +21,10 @@ public class BookingService {
     }
 
     //Find Booking details by BookingId
-    public Booking getBookingById(String bookingId){
+    public Booking getBookingById(Integer bookingId){
 
         Booking bookingFoundById = new Booking();
-        Optional<Booking> booking = this.bookingRepository.findById(bookingId);
+        Optional<Booking> booking = this.bookingRepository.findByBookingId(bookingId);
         if(booking.isPresent()) {
             bookingFoundById = booking.get();
         }else{
@@ -44,12 +44,12 @@ public class BookingService {
     }
 
     //Delete a booking using  booking Id.
-    public String deleteBookingById(String bookingId){
+    public String deleteBookingById(Integer bookingId){
         String result = "Booking : " + bookingId + " not found.";
-        Boolean isBookingAvailable=this.bookingRepository.existsById(bookingId);
+        Boolean isBookingAvailable=this.bookingRepository.existsByBookingId(bookingId);
 
         if(isBookingAvailable){
-            this.bookingRepository.deleteById(bookingId);
+            this.bookingRepository.deleteByBookingId(bookingId);
             result = "User : " + bookingId + " deleted.";
         }
         return result;
@@ -70,8 +70,8 @@ public class BookingService {
         return this.bookingRepository.findAllBookingDetailsByBookedByBetween(bookedFromDate, bookedToDate);
     }
 
-    //Find Booking details by paymentId
+    /*//Find Booking details by paymentId
     public Booking findBookingByPaymentId(String paymentId){
         return this.bookingRepository.findBookingDetailsByPaymentSet(paymentId);
-    }
+    }*/
 }
