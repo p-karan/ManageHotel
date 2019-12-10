@@ -63,10 +63,10 @@ public class Booking {
     @Column(nullable = false, length = 6)
     private String userId;
 
-    @Column(nullable = false, length=40)
+    @Column(nullable = false, unique = true, length=40)
     private String userName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="bookingId", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name="bookingId", nullable = false)
     private Set<Payment> paymentSet;
 }
