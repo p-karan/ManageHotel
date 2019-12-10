@@ -1,29 +1,33 @@
-//package com.stays.hotelmanagement.entities;
+package com.stays.hotelmanagement.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-
+import lombok.*;
 import javax.persistence.*;
+import java.util.Set;
 
-/*
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
-@Table(name="HBMS_HOTELS")
-public class Hotel {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="Hotels")
+public class Hotel{
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(length = 6)
-    private String hotelId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long hotelId;
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false)
     private String hotelName;
 
+    @Column(nullable = false)
+    private Address address;
 
+    @Column(nullable = false)
+    private String hotelEmail;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private Set<Room> rooms;
+
+    @Column(nullable = false)
+    private int rating;
 }
-*/
