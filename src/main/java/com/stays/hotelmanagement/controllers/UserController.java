@@ -43,28 +43,15 @@ public class UserController {
         return this.userService.getUserByUserName(userName);
     }
 
-    //Delete User by User_Id
-    @DeleteMapping(value = "user/")
+    //Delete User
+    @DeleteMapping(value = "/user", produces = "application/json", consumes = "application/json")
     public Users deleteUser(@RequestBody Users existingUser){
         return this.userService.deleteUser(existingUser);
     }
 
     //Delete User by User_Name
-    /*@DeleteMapping(value = "user/{userName}")
-    public String deleteUserByName(@PathVariable("userName") String userName) {
-        String userNotFound = "User : " + userName + " not found";
-        String deleteSuccess = "User record deleted successfully.";
-        String deleteFailure = "Delete operation failed.";
-        boolean isUserPresent = this.userService.checkUserExist(userName);
-        if (isUserPresent) {
-            boolean isdeleteSuccessFul = this.userService.deleteUserByUserName(userName);
-            if (isdeleteSuccessFul) {
-                return deleteSuccess;
-            } else {
-                return deleteFailure;
-            }
-        } else {
-            return userNotFound;
-        }
-    }*/
+    @DeleteMapping(value = "user/{userName}", produces = "application/json")
+    public Users deleteUserByName(@PathVariable("userName") String userName) {
+       return this.userService.deleteUserByUserName(userName);
+    }
 }

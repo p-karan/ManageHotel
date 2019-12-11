@@ -16,7 +16,7 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(length=4)
+    @Column(length=6)
     private int paymentId;
 
     @Column(nullable = false, length=40)

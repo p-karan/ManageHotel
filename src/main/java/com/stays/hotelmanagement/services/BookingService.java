@@ -21,14 +21,12 @@ public class BookingService {
     }
 
     //Find Booking details by BookingId
-    public Booking getBookingById(Integer bookingId){
+    public Booking getBookingById(int bookingId){
 
         Booking bookingFoundById = new Booking();
-        Optional<Booking> booking = this.bookingRepository.findByBookingId(bookingId);
+        Optional<Booking> booking = this.bookingRepository.findById(bookingId);
         if(booking.isPresent()) {
             bookingFoundById = booking.get();
-        }else{
-            // Add logic to check for null user.
         }
         return bookingFoundById;
     }
@@ -44,15 +42,25 @@ public class BookingService {
     }
 
     //Delete a booking using  booking Id.
-    public String deleteBookingById(Integer bookingId){
-        String result = "Booking : " + bookingId + " not found.";
-        Boolean isBookingAvailable=this.bookingRepository.existsByBookingId(bookingId);
-
+    public Optional<Booking> deleteBookingById(int bookingId){
+        boolean isBookingAvailable=this.bookingRepository.existsById(bookingId);
+        Optional<Booking> bookingToBeDeleted = Optional.of(new Booking());
         if(isBookingAvailable){
-            this.bookingRepository.deleteByBookingId(bookingId);
-            result = "User : " + bookingId + " deleted.";
+            bookingToBeDeleted = this.bookingRepository.findById(bookingId);
+            this.bookingRepository.deleteById(bookingId);
         }
-        return result;
+        return bookingToBeDeleted;
+    }
+
+    //Delete a booking
+    public Booking deleteBooking(Booking existingBooking){
+        Booking deletedBooking = new Booking();
+        Boolean isBookingAvailable=this.bookingRepository.existsById(existingBooking.getBookingId());
+        if(isBookingAvailable){
+            this.bookingRepository.delete(existingBooking);
+            deletedBooking = existingBooking;
+        }
+        return deletedBooking;
     }
 
     //Find Booking details by HotelId

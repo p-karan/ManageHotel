@@ -44,7 +44,7 @@ public class UserServices {
     //Find User by User_Id
     public Users getUserById(int userId) {
         Users userFoundById = new Users();
-        Optional<Users> user = this.userRepository.findByUserId(userId);
+        Optional<Users> user = this.userRepository.findById(userId);
         if (user.isPresent()) {
             userFoundById = user.get();
         }
@@ -54,33 +54,33 @@ public class UserServices {
     //Find User by User_Name
     public Users getUserByUserName(String userName) {
         Users userFoundByUserName = new Users();
-        Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(userName));
+        Optional<Users> user = this.userRepository.findUsersByUserName(userName);
         if (user.isPresent()) {
             userFoundByUserName = user.get();
         }
         return userFoundByUserName;
     }
 
-    //Delete User by User_Id
+    //Delete User
     public Users deleteUser(Users existingUser){
         Users deletedUser = new Users();
         Boolean isUserAvailable=this.userRepository.existsById(existingUser.getUserId());
         if(isUserAvailable){
-            this.userRepository.deleteById(););
+            this.userRepository.delete(existingUser);
             deletedUser = existingUser;
         }
         return deletedUser;
     }
-    
-    //Delete User 
-    /*public Users deleteUserByUserName(String userName) {
-        boolean isDeleteSuccessful = false;
-        Optional<Users> user = Optional.ofNullable(this.userRepository.findUsersByUserName(userName));
-        this.userRepository.deleteById(user.get().getUserId());
-        boolean isPresent = this.userRepository.existsById(user.get().getUserId());
-        if(!isPresent){
-            isDeleteSuccessful = true;
+
+    //Delete User by UserName
+    public Users deleteUserByUserName(String userName) {
+        Users userDeletedByUserName = new Users();
+        Optional<Users> user = this.userRepository.findUsersByUserName(userName);
+        if(user.isPresent()){
+            this.userRepository.deleteByUserName(userName);
+            userDeletedByUserName = user.get();
         }
-        return isDeleteSuccessful;
-    }*/
+        return userDeletedByUserName;
+    }
+
 }

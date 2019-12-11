@@ -25,7 +25,8 @@ public class PaymentController {
         return this.paymentService.getAllPayments();
     }
 
-    //Find Payment details by BookingId
+    //Find Payment details by BookingId >>> THIS DOES NOT WORK SINCE JPA One to Many constraint. Booking ID is present in parent table
+    //and not exclusively available in Booking table.
     /*@GetMapping(value = "payment/{bookingId}")
     public List<Payment> findPaymentById(@PathVariable("bookingId") String bookingId) {
         return this.paymentService.findPaymentById(bookingId);
@@ -39,13 +40,13 @@ public class PaymentController {
 
     //Update a payment
     @PutMapping(value = "/payment", produces = "application/json", consumes = "application/json")
-    public Payment updatePayment(Payment existingPayment) {
-            return this.paymentService.updatePayment(existingPayment);
+    public Payment updatePayment(@RequestBody Payment existingPayment) {
+        return this.paymentService.updatePayment(existingPayment);
     }
 
     //Delete a payment
     @DeleteMapping(value = "/payment/{paymentId}")
-    public boolean deletePayment(@PathVariable("paymentId") Integer paymentId){
+    public boolean deletePayment(@PathVariable("paymentId") int paymentId){
         return this.paymentService.deletePayment(paymentId);
     }
 }

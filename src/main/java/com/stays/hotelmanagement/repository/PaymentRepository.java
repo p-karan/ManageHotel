@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, String> {
-    Optional<Payment> findByPaymentId(Integer paymentId);
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
+  /*  Optional<Payment> findByPaymentId(Integer paymentId);
     void deleteByPaymentId(Integer paymentId);
-    boolean existsByPaymentId(Integer paymentId);
+    boolean existsByPaymentId(Integer paymentId);*/
 }
