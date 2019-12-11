@@ -38,7 +38,6 @@ Post: /user
 
 
 {
-   "userId": 2,
    "userName": "karan_p",
    "password": "test456",
    "fullName": "Karan Prajapati",
@@ -59,7 +58,6 @@ Post: /user
 
 
 {
-   "userId": 3,
    "userName": "ashish_r",
    "password": "test789",
    "fullName": "Ashish Rushiya",
@@ -79,7 +77,6 @@ Post: /user
 }
 
 {
-   "userId": 4,
    "userName": "swapneel_s",
    "password": "test010",
    "fullName": "Swapneel Sawant",
@@ -104,7 +101,6 @@ Entity - Booking and Payment
 Post : /booking
 
 {
-   "bookingId": 5,
    "bookedFromDate": "2019-12-11",
    "bookedToDate": "2019-12-13",
    "daysBooked": 2,
@@ -130,7 +126,6 @@ Post : /booking
 
 
 {
-   "bookingId": 7,
    "bookedFromDate": "2019-12-12",
    "bookedToDate": "2019-12-15",
    "daysBooked": 3,

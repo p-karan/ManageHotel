@@ -19,15 +19,15 @@ public class PaymentService {
         return this.paymentRepository.save(newPayment);
     }
 
-    //Check if a particular paymentId exists.
+/*    //Check if a particular paymentId exists.
     public boolean checkPaymentExist(int paymentId) {
         boolean isPaymentIdPresent = false;
-        Optional<Payment> paymentFound = this.paymentRepository.findByPaymentId(paymentId);
+        Optional<Payment> paymentFound = this.paymentRepository.findById(paymentId);
         if (paymentFound.isPresent()) {
             isPaymentIdPresent = true;
         }
         return isPaymentIdPresent;
-    }
+    }*/
 
     //Find all Payments
     public List<Payment> getAllPayments() {
@@ -46,20 +46,16 @@ public class PaymentService {
 
     //Update a payment
     public Payment updatePayment(Payment existingPayment) {
-        boolean isPaymentIdPresent = this.checkPaymentExist(existingPayment.getPaymentId());
-        if (isPaymentIdPresent) {
-            this.paymentRepository.save(existingPayment);
-        }
-        return existingPayment;
+        return this.paymentRepository.save(existingPayment);
     }
 
     //Delete a payment
     public boolean deletePayment(int paymentId) {
         boolean isDeleteSuccessful = false;
-        boolean isPaymentIdPresent = this.checkPaymentExist(paymentId);
-        if (isPaymentIdPresent) {
-            this.paymentRepository.deleteByPaymentId(paymentId);
-            boolean isPaymentAvailable = this.paymentRepository.existsByPaymentId(paymentId);
+        Optional<Payment> paymentFound = this.paymentRepository.findById(paymentId);
+        if (paymentFound.isPresent()) {
+            this.paymentRepository.deleteById(paymentId);
+            boolean isPaymentAvailable = this.paymentRepository.existsById(paymentId);
             if (!isPaymentAvailable) {
                 isDeleteSuccessful = true;
             }

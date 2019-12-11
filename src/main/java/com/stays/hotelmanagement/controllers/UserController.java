@@ -50,7 +50,7 @@ public class UserController {
     }
 
     //Delete User by User_Name
-    @DeleteMapping(value = "user/{userName}")
+    @DeleteMapping(value = "user/{userName}", produces = "application/json")
     public Users deleteUserByName(@PathVariable("userName") String userName) {
        return this.userService.deleteUserByUserName(userName);
     }

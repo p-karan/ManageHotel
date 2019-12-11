@@ -44,7 +44,7 @@ public class UserServices {
     //Find User by User_Id
     public Users getUserById(int userId) {
         Users userFoundById = new Users();
-        Optional<Users> user = this.userRepository.findByUserId(userId);
+        Optional<Users> user = this.userRepository.findById(userId);
         if (user.isPresent()) {
             userFoundById = user.get();
         }
@@ -64,9 +64,9 @@ public class UserServices {
     //Delete User
     public Users deleteUser(Users existingUser){
         Users deletedUser = new Users();
-        Boolean isUserAvailable=this.userRepository.existsByUserId(existingUser.getUserId());
+        Boolean isUserAvailable=this.userRepository.existsById(existingUser.getUserId());
         if(isUserAvailable){
-            this.userRepository.deleteByUserId(existingUser.getUserId());
+            this.userRepository.delete(existingUser);
             deletedUser = existingUser;
         }
         return deletedUser;

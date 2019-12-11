@@ -40,13 +40,13 @@ public class PaymentController {
 
     //Update a payment
     @PutMapping(value = "/payment", produces = "application/json", consumes = "application/json")
-    public Payment updatePayment(Payment existingPayment) {
+    public Payment updatePayment(@RequestBody Payment existingPayment) {
         return this.paymentService.updatePayment(existingPayment);
     }
 
     //Delete a payment
     @DeleteMapping(value = "/payment/{paymentId}")
-    public boolean deletePayment(@PathVariable("paymentId") Integer paymentId){
+    public boolean deletePayment(@PathVariable("paymentId") int paymentId){
         return this.paymentService.deletePayment(paymentId);
     }
 }

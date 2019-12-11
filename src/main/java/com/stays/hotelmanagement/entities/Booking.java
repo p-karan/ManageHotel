@@ -43,7 +43,7 @@ public class Booking {
     private int noOfAdults;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
-    private int noOfChildrens;
+    private int noOfChildren;
 
     @Column(nullable = false, length = 40)
     private String bookedBy;
@@ -52,13 +52,13 @@ public class Booking {
     private String bookingStatus;
 
     @Column(nullable = false, length = 6)
-    private String hotelId;
+    private int hotelId;
 
     @Column(nullable = false, length = 6)
-    private String roomId;
+    private int roomId;
 
     @Column(nullable = false, length = 6)
-    private String userId;
+    private int userId;
 
     @Column(nullable = false, length=40)
     private String userName;

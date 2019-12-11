@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookingRepository extends JpaRepository<Booking, String> {
+public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     //Search Functions
     public List<Booking> findAllBookingDetailsByUserId(String userId);
