@@ -18,19 +18,30 @@ public class Address {
 /*    @GeneratedValue(strategy = GenerationType.AUTO)
     private int addressId;*/
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=60)
     private String addressBldgFlat;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=80)
     private String addressStreet;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=40)
     private String addressCity;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=40)
     private String addressState;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=8)
     private String addressPincode;
 
+    @Column(nullable = false, length=40)
+    private String email;
+
+    @Column(nullable = false, length=15)
+    private String mobileNo;
+
+    @Column(length=15)
+    private String primaryPhone;
+
+    @Column(length=15)
+    private String secondaryPhone;
 }

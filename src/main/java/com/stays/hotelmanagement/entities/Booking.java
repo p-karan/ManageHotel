@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -18,10 +19,9 @@ import java.util.Set;
 public class Booking {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String bookingId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(length = 6)
+    private int bookingId;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private LocalDate bookedFromDate;
@@ -29,39 +29,39 @@ public class Booking {
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE+1")
     private LocalDate bookedToDate;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1",length = 3)
     private int daysBooked;
 
-    //    @Column(nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime checkInDateTime;
 
-    //    @Column(nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime checkOutDateTime;
 
     @Column(nullable = false, precision = 10, scale = 2, columnDefinition = "FLOAT DEFAULT 0.0")
     private double bookingAmount;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1",length = 2)
     private int noOfAdults;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
-    private int noOfChildrens;
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
+    private int noOfChildren;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String bookedBy;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String bookingStatus;
 
-    @Column(nullable = false)
-    private String hotelId;
+    @Column(nullable = false, length = 6)
+    private int hotelId;
 
-    @Column(nullable = false)
-    private String roomId;
+    @Column(nullable = false, length = 6)
+    private int roomId;
 
-    private String userId;
+    @Column(nullable = false, length = 6)
+    private int userId;
+
+    @Column(nullable = false, length=40)
+    private String userName;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="bookingId", nullable = false)

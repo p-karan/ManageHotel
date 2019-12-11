@@ -3,6 +3,7 @@ package com.stays.hotelmanagement.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,32 +16,30 @@ import java.util.Set;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(nullable = false, length = 6)
+    private int userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length=40)
     private String userName;
 
-    @Column(nullable = false)
+    @Column(nullable = false , length=15)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=80)
     private String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=20)
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-    @Column(nullable = false)
-    private String email;
-
-    /*@Column(nullable = false)*/
+    @Column(length=40)
     private String workLocation;
 
     @Embedded
     private Address addresses;
 
-   /* @OneToMany(cascade = CascadeType.ALL)
+    /*@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="userId", nullable = false)
     private Set<Booking> bookings;*/
 
