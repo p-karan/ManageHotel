@@ -3,63 +3,56 @@ package com.stays.hotelmanagement.controllers;
 import com.stays.hotelmanagement.entities.Hotel;
 import com.stays.hotelmanagement.services.HotelServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class HotelController {
 
     @Autowired
-    private HotelServices service;
+    private HotelServices hotelServices;
 
     @GetMapping(value = "/hotel")
-    public Iterable<Hotel> getHotel(){
+    public List<Hotel> getHotel(){
 
-        return this.service.getAll();
+        return this.hotelServices.getAll();
     }
 
+    //Add Hotel
     @PostMapping(value = "/hotel", produces = "application/json", consumes = "application/json")
     public Hotel add(@RequestBody Hotel hotel){
 
-        return this.service.addHotel(hotel);
+        return this.hotelServices.addHotel(hotel);
     }
 
     @PutMapping(value = "/hotel", produces = "application/json", consumes = "application/json")
     public Hotel update(@RequestBody Hotel hotel){
 
-        return this.service.updateHotel(hotel);
+        return this.hotelServices.updateHotel(hotel);
     }
 
-    @GetMapping(value = "/hotel/id/{id}")
-    public Optional<Hotel> findHotelById(@PathVariable("id") long id){
+    @GetMapping(value = "/hotel/hotelId/{id}")
+    public Hotel findHotelById(@PathVariable("id") int id){
 
-        return this.service.findById(id);
+        return this.hotelServices.findById(id);
     }
 
-    @DeleteMapping(value = "/hotel/{id}")
-    public void deleteHotelById(@PathVariable("id") long id){
-
-        this.service.deleteHotelById(id);
+    @DeleteMapping(value = "/hotel/{id}", produces = "application/json")
+    public Hotel deleteHotelById(@PathVariable("id") int id){
+        return this.hotelServices.deleteHotelById(id);
     }
 
     @DeleteMapping(value = "/hotel", produces = "application/json", consumes = "application/json")
-    public void deleteHotel(@RequestBody Hotel hotel){
+    public Hotel deleteHotel(@RequestBody Hotel hotel){
 
-        this.service.deleteHotel(hotel);
+        return this.hotelServices.deleteHotel(hotel);
     }
 
     @GetMapping("/hotel/sort/{propName}")
     public Iterable<Hotel> showSortBy(@PathVariable("propName") String propName){
 
-        return this.service.sortBy(propName);
-    }
-
-    @GetMapping("/hotel/paginate/{pageNo}/{size}/{propName}")
-    public Page<Hotel> paginate(@PathVariable("pageNo") int pageNo, @PathVariable("size") int size, @PathVariable("propName") String propName){
-        return this.service.paginate(pageNo,size,propName);
+        return this.hotelServices.sortBy(propName);
     }
 
 }

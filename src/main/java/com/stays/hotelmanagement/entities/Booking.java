@@ -23,7 +23,7 @@ public class Booking {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")*/
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
     @SequenceGenerator(name="booking_generator", sequenceName = "hbms_booking_id_seq", allocationSize = 1)*/
-    @Column(length = 6)
+        @Column(length = 6)
     private String bookingId;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")

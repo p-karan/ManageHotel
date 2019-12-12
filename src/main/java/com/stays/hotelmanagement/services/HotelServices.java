@@ -1,16 +1,10 @@
 package com.stays.hotelmanagement.services;
 
 import com.stays.hotelmanagement.entities.Hotel;
-import com.stays.hotelmanagement.repository.GenericRepository;
 import com.stays.hotelmanagement.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,63 +12,62 @@ import java.util.Optional;
 public class HotelServices {
 
     @Autowired
-    private HotelRepository repo;
+    private HotelRepository hotelRepository;
 
-    public Iterable<Hotel> getAll(){
+    public List<Hotel> getAll(){
 
-        return this.repo.findAll();
+        return this.hotelRepository.findAll();
     }
 
     public Iterable<Hotel> sortBy(String propName){
 
         Sort sortBy = Sort.by(propName);
 
-        return this.repo.findAll(sortBy);
+        return this.hotelRepository.findAll(sortBy);
     }
 
-    public Page<Hotel> paginate(int pageNo, int size, String prop){
-
-        Pageable pageRequest = PageRequest.of(pageNo,size,Sort.by(prop));
-
-        Page<Hotel> page = repo.findAll(pageRequest);
-
-        List<Hotel> hotelsList = new ArrayList<>();
-
-        if(page.hasContent()){
-            hotelsList = page.getContent();
-        }
-
-        return page;
-    }
 
     public Hotel addHotel(Hotel hotel){
-        return (Hotel) this.repo.save(hotel);
+        return this.hotelRepository.save(hotel);
     }
+
 
     public Hotel updateHotel(Hotel hotel){
-        return (Hotel) this.repo.save(hotel);
+        return (Hotel) this.hotelRepository.save(hotel);
     }
 
-    public Optional<Hotel> findById(long id){
-
-        return this.repo.findById(id);
+    public Hotel findById(int id){
+        Hotel hotelFoundById = new Hotel();
+        Optional<Hotel> hotel = this.hotelRepository.findById(id);
+        if (hotel.isPresent()) {
+            hotelFoundById = hotel.get();
+        } else {
+            // Add logic to check for null user.
+        }
+        return hotelFoundById;
     }
 
     public Hotel deleteHotel(Hotel hotel){
-        this.repo.delete(hotel);
+        this.hotelRepository.delete(hotel);
         return hotel;
     }
 
-    public String deleteHotelById(long id){
-        String message="";
-        this.repo.deleteById(id);
-        boolean isDeleted = this.repo.existsById(id);
-        if(isDeleted){
-            message = "Hotel with ID " + id + "is not deleted";
+    public Hotel deleteHotelById(int id){
+        Hotel hotelDeletedById = new Hotel();
+        Optional<Hotel> hotel = this.hotelRepository.findById(id);
+        if(hotel.isPresent()){
+            this.hotelRepository.deleteById(id);
+            hotelDeletedById = hotel.get();
         }
-        else{
-            message = "Hotel with ID " + id + "is deleted";
-        }
-        return message;
+        return hotelDeletedById;
     }
+
+    /*public boolean checkHotelExist(int id) {
+        boolean isHotelPresent = false;
+        Optional<Hotel> hotel = this.hotelRepository.findById(id);
+        if (hotel.isPresent()) {
+            isHotelPresent = true;
+        }
+        return isHotelPresent;
+    }*/
 }
