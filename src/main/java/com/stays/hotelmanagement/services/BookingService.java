@@ -1,13 +1,20 @@
 package com.stays.hotelmanagement.services;
 
+import com.stays.hotelmanagement.controllers.BookingController;
+import com.stays.hotelmanagement.controllers.UserController;
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @Service
 public class BookingService {
@@ -64,18 +71,28 @@ public class BookingService {
     }
 
     //Find Booking details by HotelId
-    public List<Booking> findBookingByHotelId(String hotelId){
+    public List<Booking> findBookingByHotelId(int hotelId){
         return this.bookingRepository.findAllBookingDetailsByHotelId(hotelId);
     }
 
     //Find Booking details by RoomId
-    public List<Booking> findBookingByRoomId(String roomId){
+    public List<Booking> findBookingByRoomId(int roomId){
         return this.bookingRepository.findAllBookingDetailsByRoomId(roomId);
+    }
+
+    //Find Booking details by UserName
+    public List<Booking> findBookingByUserName(String userName){
+        return this.bookingRepository.findAllBookingDetailsByUserName(userName);
+    }
+
+    //Find Booking details by BookedBy
+    public List<Booking> findBookingByBookedBy(String bookedBy){
+        return this.bookingRepository.findAllBookingDetailsByBookedBy(bookedBy);
     }
 
     //Find Booking details between bookingFromDate and bookingToDate
     public List<Booking> findBookingByDateRange(LocalDate bookedFromDate, LocalDate bookedToDate){
-        return this.bookingRepository.findAllBookingDetailsByBookedByBetween(bookedFromDate, bookedToDate);
+        return this.bookingRepository.findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(bookedFromDate, bookedToDate);
     }
 
     /*//Find Booking details by paymentId

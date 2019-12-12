@@ -3,8 +3,13 @@ package com.stays.hotelmanagement.controllers;
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +53,43 @@ public class BookingController {
     @DeleteMapping(value="/booking", produces = "application/json", consumes = "application/json")
     public Booking deleteBooking(@RequestBody Booking existingBooking){
         return this.bookingService.deleteBooking(existingBooking);
+    }
+
+    //Find Booking details by HotelId
+    @GetMapping(value = "/booking/hotel/{hotel}")
+    public List<Booking> getAllBookingByHotelId(@PathVariable("hotel") int hotelId){
+
+        return this.bookingService.findBookingByHotelId(hotelId);
+    }
+
+    //Find Booking details by RoomId
+    @GetMapping(value = "/booking/room/{room}")
+    public List<Booking> getAllBookingByRoomId(@PathVariable("room") int roomId){
+
+        return this.bookingService.findBookingByRoomId(roomId);
+    }
+
+    //Find Booking details by UserName
+    @GetMapping(value = "/booking/userName/{userName}")
+    public List<Booking> getAllBookingByUserName(@PathVariable("userName") String userName){
+
+        return this.bookingService.findBookingByUserName(userName);
+    }
+
+    //Find Booking details by BookedBy
+    @GetMapping(value = "/booking/bookedBy/{bookedBy}")
+    public List<Booking> getAllBookingByBookedBy(@PathVariable("bookedBy") String bookedBy){
+
+        return this.bookingService.findBookingByBookedBy(bookedBy);
+    }
+
+    //Find Booking details between bookingFromDate and bookingToDate
+    @GetMapping(value = "/booking/date/{bookFrom}/{bookTo}")
+    public List<Booking> getAllBookingByDateRange(
+            @PathVariable("bookFrom") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate bookedFromDate,
+            @PathVariable("bookTo") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate bookedToDate){
+
+        return this.bookingService.findBookingByDateRange(bookedFromDate, bookedToDate);
     }
 
 }

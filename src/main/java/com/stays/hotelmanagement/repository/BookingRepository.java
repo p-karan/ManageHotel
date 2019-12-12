@@ -12,11 +12,13 @@ import java.util.Optional;
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     //Search Functions
-    public List<Booking> findAllBookingDetailsByUserId(String userId);
-    public List<Booking> findAllBookingDetailsByHotelId(String hotelId);
-    public List<Booking> findAllBookingDetailsByRoomId(String roomId);
+    public List<Booking> findAllBookingDetailsByUserId(int userId);
+    public List<Booking> findAllBookingDetailsByHotelId(int hotelId);
+    public List<Booking> findAllBookingDetailsByRoomId(int roomId);
+    public List<Booking> findAllBookingDetailsByUserName(String userName);
+    public List<Booking> findAllBookingDetailsByBookedBy(String BookedBy);
     //    public Booking findBookingDetailsByPaymentSet(String paymentId);
-    public List<Booking> findAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);
+    public List<Booking> findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
 
     //Delete Functions
 //    public String deleteAllBookingDetailsByUserId(String userId);
