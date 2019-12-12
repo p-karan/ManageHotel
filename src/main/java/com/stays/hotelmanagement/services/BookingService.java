@@ -2,6 +2,7 @@ package com.stays.hotelmanagement.services;
 
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.repository.BookingRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,13 +74,17 @@ public class BookingService {
         return this.bookingRepository.findAllBookingDetailsByRoomId(roomId);
     }
 
-    //Find Booking details between bookingFromDate and bookingToDate
+   /* //Find Booking details between bookingFromDate and bookingToDate
     public List<Booking> findBookingByDateRange(LocalDate bookedFromDate, LocalDate bookedToDate){
         return this.bookingRepository.findAllBookingDetailsByBookedByBetween(bookedFromDate, bookedToDate);
-    }
+    }*/
 
     /*//Find Booking details by paymentId
     public Booking findBookingByPaymentId(String paymentId){
         return this.bookingRepository.findBookingDetailsByPaymentSet(paymentId);
     }*/
+
+    public List<Booking> findBookingByDateRange(LocalDate bookedFromDate, LocalDate bookedToDate){
+        return this.bookingRepository.findAllByBookedFromDateGreaterThanEqualAndAndBookedToDateLessThanEqual(bookedFromDate, bookedToDate);
+    }
 }

@@ -25,6 +25,9 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     public String deleteBookingDetailsByPaymentSet(String paymentId);
     public String deleteAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);
 
+    /*public List<Booking> findAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);*/
+    public List<Booking> findAllByBookedFromDateGreaterThanEqualAndAndBookedToDateLessThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
+
     Optional<Booking> findByBookingId(Integer bookingId);
     Boolean existsByBookingId(Integer bookingId);
     void deleteByBookingId(Integer bookingId);
