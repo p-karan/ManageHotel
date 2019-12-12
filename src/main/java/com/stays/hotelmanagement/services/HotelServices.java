@@ -62,12 +62,5 @@ public class HotelServices {
         return hotelDeletedById;
     }
 
-    /*public boolean checkHotelExist(int id) {
-        boolean isHotelPresent = false;
-        Optional<Hotel> hotel = this.hotelRepository.findById(id);
-        if (hotel.isPresent()) {
-            isHotelPresent = true;
-        }
-        return isHotelPresent;
-    }*/
+
 }

@@ -55,5 +55,5 @@ public class RoomController {
 
         return this.roomServices.sortBy(propName);
     }
-
 }
+

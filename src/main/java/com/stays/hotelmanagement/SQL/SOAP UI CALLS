@@ -1,0 +1,173 @@
+**********************************************
+DROP TRIGGER HBMS_PAYMENT_ID_BEFORE_INSERT;
+DROP TRIGGER HBMS_BOOKING_ID_BEFORE_INSERT;
+DROP TRIGGER HBMS_USER_ID_BEFORE_INSERT;
+
+DROP SEQUENCE HBMS_USER_ID_SEQ;
+DROP SEQUENCE HBMS_BOOKING_ID_SEQ;
+DROP SEQUENCE HBMS_PAYMENT_ID_SEQ;
+
+DROP TABLE HBMS_USERS;
+DROP TABLE HBMS_BOOKING_DETAILS;
+DROP TABLE HBMS_PAYMENT_DETAILS;
+***********************************************
+SOAP UI - REST Queries:
+
+Users Entity
+------------
+Post: /user
+
+{
+   "userName": "harshad_t",
+   "password": "test123",
+   "fullName": "Harshad Tawade",
+   "role": "ADMIN",
+   "workLocation": "Mumbai",
+   "addresses":    {
+      "addressBldgFlat": "108/Ashtavinayak CHS, Samta Colony",
+      "addressStreet": "Pantnagar, Ghatkopar East",
+      "addressCity": "Mumbai",
+      "addressState": "Maharashtra",
+      "addressPincode": "400075",
+      "email": "tawade.harshad@gmail.com",
+      "mobileNo": "9819865318",
+      "primaryPhone": "21028337",
+      "secondaryPhone": null
+   }
+}
+
+
+{
+   "userName": "karan_p",
+   "password": "test456",
+   "fullName": "Karan Prajapati",
+   "role": "ADMIN",
+   "workLocation": "Mumbai",
+   "addresses":    {
+      "addressBldgFlat": "Lab 5, 2nd Floor, Seed Infotech",
+      "addressStreet": "VINMAR House, Chakala",
+      "addressCity": "Mumbai",
+      "addressState": "Maharashtra",
+      "addressPincode": "400075",
+      "email": "karan_p@gmail.com",
+      "mobileNo": "9819860000",
+      "primaryPhone": "21028337",
+      "secondaryPhone": "12345678"
+   }
+}
+
+
+{
+   "userName": "ashish_r",
+   "password": "test789",
+   "fullName": "Ashish Rushiya",
+   "role": "ADMIN",
+   "workLocation": "Mumbai",
+   "addresses":    {
+      "addressBldgFlat": "Lab 5, 2nd Floor, Seed Infotech",
+      "addressStreet": "VINMAR House, Chakala",
+      "addressCity": "Mumbai",
+      "addressState": "Maharashtra",
+      "addressPincode": "400075",
+      "email": "ashish_r@gmail.com",
+      "mobileNo": "9819860000",
+      "primaryPhone": "21028337",
+      "secondaryPhone": "12345678"
+   }
+}
+
+{
+   "userName": "swapneel_s",
+   "password": "test010",
+   "fullName": "Swapneel Sawant",
+   "role": "ADMIN",
+   "workLocation": "Mumbai",
+   "addresses":    {
+      "addressBldgFlat": "Lab 5, 2nd Floor, Seed Infotech",
+      "addressStreet": "VINMAR House, Chakala",
+      "addressCity": "Mumbai",
+      "addressState": "Maharashtra",
+      "addressPincode": "400075",
+      "email": "swapneel_s@gmail.com",
+      "mobileNo": "9819860000",
+      "primaryPhone": "21028337",
+      "secondaryPhone": "12345678"
+   }
+}
+
+----------------------------
+Entity - Booking and Payment
+
+Post : /booking
+
+{
+   "bookedFromDate": "2019-12-11",
+   "bookedToDate": "2019-12-13",
+   "daysBooked": 2,
+   "checkInDateTime": "2019-12-11T12:00:00",
+   "checkOutDateTime": "2019-12-13T10:00:00",
+   "bookingAmount": 3000,
+   "noOfAdults": 2,
+   "noOfChildren": 0,
+   "bookedBy": "harshad_t",
+   "bookingStatus": "CONFIRMED",
+   "hotelId": 111111,
+   "roomId": 222222,
+   "userId": 1,
+   "userName": "harshad_t",
+   "paymentSet": [   {
+      "payStatus": "PAID_FULL",
+      "payAmount": 2000,
+      "payDate": "2019-12-10",
+      "payMode": "CASH"
+   }]
+}
+
+
+{
+   "bookedFromDate": "2019-12-12",
+   "bookedToDate": "2019-12-15",
+   "daysBooked": 3,
+   "checkInDateTime": "2019-12-12T12:00:00",
+   "checkOutDateTime": "2019-12-15T10:00:00",
+   "bookingAmount": 6000,
+   "noOfAdults": 2,
+   "noOfChildren": 2,
+   "bookedBy": "karan_p",
+   "bookingStatus": "CONFIRMED",
+   "hotelId": 111111,
+   "roomId": 222222,
+   "userId": 2,
+   "userName": "karan_p",
+   "paymentSet": [   {
+      "payStatus": "PAID_PARTIAL",
+      "payAmount": 2000,
+      "payDate": "2019-12-10",
+      "payMode": "CASH"
+   }]
+}
+
+PUT >> this is to append payment details. Booking Id remains same [has to be provided] -- no payment id.
+{
+   "bookingId": 12,
+   "bookedFromDate": "2019-12-12",
+   "bookedToDate": "2019-12-15",
+   "daysBooked": 3,
+   "checkInDateTime": "2019-12-12T12:00:00",
+   "checkOutDateTime": "2019-12-15T10:00:00",
+   "bookingAmount": 6000,
+   "noOfAdults": 2,
+   "noOfChildren": 2,
+   "bookedBy": "karan_p",
+   "bookingStatus": "CONFIRMED",
+   "hotelId": 111111,
+   "roomId": 222222,
+   "userId": 2,
+   "userName": "karan_p",
+   "paymentSet": [   {
+      "payStatus": "PAID_FULL",
+      "payAmount": 4000,
+      "payDate": "2019-12-10",
+      "payMode": "CARD"
+   }]
+}
