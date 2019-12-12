@@ -3,91 +3,86 @@ package com.stays.hotelmanagement.controllers;
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(value = "*")
 public class BookingController {
 
     @Autowired
     private BookingService bookingService;
 
     //Find all Booking details
-    @GetMapping(value = "/booking")
-    public List<Booking> getBooking(){
+    @GetMapping(value="/booking")
+    public List<Booking> getAllBooking(){
         return this.bookingService.getAllBooking();
     }
 
     //Find Booking details by BookingId
-    @GetMapping(value = "/booking/{Id}")
-    public Booking getAllBookingById(@PathVariable("Id") String id){
-
-        return this.bookingService.findBookingById(id);
+    @GetMapping(value = "/booking/{bookingId}")
+    public Booking getBookingById(@PathVariable("bookingId") int bookingId){
+        return this.bookingService.getBookingById(bookingId);
     }
 
     //Add a Booking
-    @PostMapping(value = "/booking",produces = "application/json", consumes = "application/json")
+    @PostMapping(value = "/booking", produces = "application/json", consumes = "application/json")
     public Booking addBooking(@RequestBody Booking booking){
-
         return this.bookingService.addBooking(booking);
     }
 
     //Update a Booking record
-    @PutMapping(value = "/booking",produces = "application/json", consumes = "application/json")
+    @PutMapping(value = "/booking" , produces = "application/json", consumes = "application/json")
     public Booking updateBooking(@RequestBody Booking booking){
-
-        return this.bookingService.updateBooking(booking);
+        return this.bookingService.addBooking(booking);
     }
 
-    //Delete a Booking record
-    @DeleteMapping(value = "/booking",produces = "application/json", consumes = "application/json")
-    public String removeBooking(@RequestBody Booking booking){
-
-        return this.bookingService.deleteBooking(booking);
+    //Delete a booking using  booking Id.
+    @DeleteMapping(value="/booking/{bookingId}")
+    public Optional<Booking> deleteBookingById(@PathVariable("bookingId") int bookingId){
+        return this.bookingService.deleteBookingById(bookingId);
     }
 
-    //Delete a Booking by Booking Id
-    @DeleteMapping(value = "/booking/{Id}",produces = "application/json", consumes = "application/json")
-    public String removeBookingById(@PathVariable("Id") String id){
-
-        return this.bookingService.deleteBookingById(id);
+    //Delete a booking
+    @DeleteMapping(value="/booking", produces = "application/json", consumes = "application/json")
+    public Booking deleteBooking(@RequestBody Booking existingBooking){
+        return this.bookingService.deleteBooking(existingBooking);
     }
 
-    //Find Booking details by UserId
-    @GetMapping(value = "/booking/user/{user}")
-    public List<Booking> getAllBookingByUserId(@PathVariable("user") String userId){
 
-        return this.bookingService.findBookingByUserId(userId);
+    //Find a booking betweeen From and To Date
+    @GetMapping(value="booking/search/{fromDate}/{toDate}")
+    public List<Booking> getAllBookingByDateRange(
+            @PathVariable("fromDate")  @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate fromDate,
+            @PathVariable("toDate") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate toDate)
+         {
+            return this.bookingService.findBookingByDateRange(fromDate, toDate);
     }
 
-    //Find Booking details by HotelId
-    @GetMapping(value = "/booking/hotel/{hotel}")
-    public List<Booking> getAllBookingByHotelId(@PathVariable("hotel") String hotelId){
+ /*   @GetMapping(value="booking/search/{fromDate}/{toDate}")
+    public List<Booking> getAllBookingByDateRange(
+            @PathVariable("fromDate") String fromDate,
+            @PathVariable("toDate") String toDate)
+         {
+            return this.bookingService.findBookingByDateRange(fromDate, toDate);
+    }*/
 
-        return this.bookingService.findBookingByHotelId(hotelId);
-    }
+/*    @GetMapping(value="booking/search/{fromDate}/{toDate}")
+    public List<Booking> getAllBookingByDateRange(@PathVariable("fromDate") String fromDate,
+                                                  @PathVariable("toDate") String toDate) {
+        DateTimeFormatter formatter = null;
+        System.out.println(fromDate);
+        formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        LocalDate formattedFromDate = LocalDate.parse(fromDate, formatter);
+        LocalDate formattedToDate = LocalDate.parse(toDate,formatter);
+        System.out.println("From :" + formattedFromDate);
+        System.out.println("From :" + formattedToDate);
+        return this.bookingService.findBookingByDateRange(formattedFromDate, formattedToDate);
+    }*/
 
-    //Find Booking details by RoomId
-    @GetMapping(value = "/booking/room/{room}")
-    public List<Booking> getAllBookingByRoomId(@PathVariable("room") String roomId){
 
-        return this.bookingService.findBookingByRoomId(roomId);
-    }
-
-    //Find Booking details between bookingFromDate and bookingToDate
-    @GetMapping(value = "/booking/date/{bookFrom}/{bookTo}")
-    public List<Booking> getAllBookingByDateRange(@PathVariable("bookFrom") LocalDate bookedFromDate, @PathVariable("bookTo")LocalDate bookedToDate){
-
-        return this.bookingService.findBookingByDateRange(bookedFromDate,bookedToDate);
-    }
-
-    //Find Booking details by paymentId
-//    @GetMapping(value = "/booking/payment/{payment}")
-//    public Booking getAllBookingByPaymentId(@PathVariable("payment") String paymentId){
-//
-//        return this.bookingService.findBookingByPaymentId(paymentId);
-//    }
 }

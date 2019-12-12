@@ -19,12 +19,9 @@ import java.util.Set;
 public class Booking {
 
     @Id
-    /*@GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")*/
-    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
-    @SequenceGenerator(name="booking_generator", sequenceName = "hbms_booking_id_seq", allocationSize = 1)*/
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(length = 6)
-    private String bookingId;
+    private int bookingId;
 
     @Column(nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private LocalDate bookedFromDate;
@@ -46,7 +43,7 @@ public class Booking {
     private int noOfAdults;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
-    private int noOfChildrens;
+    private int noOfChildren;
 
     @Column(nullable = false, length = 40)
     private String bookedBy;
@@ -55,15 +52,15 @@ public class Booking {
     private String bookingStatus;
 
     @Column(nullable = false, length = 6)
-    private String hotelId;
+    private int hotelId;
 
     @Column(nullable = false, length = 6)
-    private String roomId;
+    private int roomId;
 
     @Column(nullable = false, length = 6)
-    private String userId;
+    private int userId;
 
-    @Column(nullable = false, unique = true, length=40)
+    @Column(nullable = false, length=40)
     private String userName;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -33,7 +33,7 @@ public class UserController {
 
     //Find User by User_Id
     @GetMapping(value = "/user/userId/{id}")
-    public Users getUserById(@PathVariable("id") String userId) {
+    public Users getUserById(@PathVariable("id") int userId) {
         return this.userService.getUserById(userId);
     }
 
@@ -43,24 +43,15 @@ public class UserController {
         return this.userService.getUserByUserName(userName);
     }
 
-    /*//Delete User by User_Id
-    @DeleteMapping(value = "user/{userId}")
-    public String deleteUserById(@PathVariable("userId") String userId){
-        return this.userService.deleteUserById(userId);
-    }*/
+    //Delete User
+    @DeleteMapping(value = "/user", produces = "application/json", consumes = "application/json")
+    public Users deleteUser(@RequestBody Users existingUser){
+        return this.userService.deleteUser(existingUser);
+    }
 
     //Delete User by User_Name
-    @DeleteMapping(value = "user/{userId}")
-    public String deleteUserById(@PathVariable("userId") String userId) {
-        //String userNotFound = "User : " + userName + " not found";
-        String deleteSuccess = "User record deleted successfully.";
-        String deleteFailure = "Delete operation failed.";
-        boolean isDeleteSuccessful = this.userService.deleteUserByUserId(userId);
-        if (isDeleteSuccessful) {
-                return deleteSuccess;
-            }
-        else {
-            return deleteFailure;
-        }
+    @DeleteMapping(value = "user/{userName}", produces = "application/json")
+    public Users deleteUserByName(@PathVariable("userName") String userName) {
+       return this.userService.deleteUserByUserName(userName);
     }
 }
