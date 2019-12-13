@@ -2,8 +2,12 @@ package com.stays.hotelmanagement.controllers;
 
 import com.stays.hotelmanagement.entities.Hotel;
 import com.stays.hotelmanagement.services.HotelServices;
+import com.stays.hotelmanagement.transactionalObject.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -54,5 +58,13 @@ public class HotelController {
 
         return this.hotelServices.sortBy(propName);
     }
+    @GetMapping(value = "/hotel/{city}/{fromDate}/{toDate}")
+    public List<SearchResult> getHotelSearchList(@PathVariable("city") String city,
+                                                 @PathVariable("fromDate")  @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate fromDate,
+                                                 @PathVariable("toDate") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate toDate){
+
+        return this.hotelServices.findHotelByCityDateAndRoomType(city, fromDate, toDate);
+    }
+
 
 }
