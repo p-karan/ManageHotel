@@ -28,18 +28,9 @@ public class Room {
     @Column(nullable = false, length = 400)
     private String roomDescription;
 
-    @Lob
-    private Blob roomImages;
-
-    @Column(nullable = false)
-    private RoomStatus roomStatus;
-
-    public enum RoomStatus {
-        AVAILABLE, BLOCKED, BOOKED
-    }
 
     public enum RoomType {
-        ECONOMY, DELUX, SUIT
+        ECONOMY, DELUXE, SUITE
     }
 
 }
