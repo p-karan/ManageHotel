@@ -15,6 +15,9 @@ public class Room {
     @Column(length = 6)
     private int roomId;
 
+    @Column(nullable = false, length = 6)
+    private int hotelId;
+
     @Column(nullable = false, precision = 10, scale = 2, columnDefinition = "FLOAT DEFAULT 0.0")
     private double ratePerNight;
 
@@ -22,16 +25,11 @@ public class Room {
     private int roomNo;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoomType roomType;
+    private String roomType;
 
     @Column(nullable = false, length = 400)
     private String roomDescription;
 
-
-    public enum RoomType {
-        ECONOMY, DELUXE, SUITE
-    }
 
 }
 
