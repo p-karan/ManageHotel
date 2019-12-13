@@ -36,8 +36,6 @@ public class Hotel{
     @Column(nullable = false, length = 400)
     private String hotelDescription;
 
-    @Lob
-    private Blob hotelImage;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
     private int discount;
