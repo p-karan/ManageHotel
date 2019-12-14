@@ -26,9 +26,9 @@ public class Hotel{
     private Address address;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+/*    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="hotelId", nullable = false)
-    private Set<Room> rooms;
+    private Set<Room> rooms;*/
 
     @Column(nullable = false , precision = 2, scale = 1, columnDefinition = "FLOAT DEFAULT 0.0")
     private double rating;

@@ -3,6 +3,7 @@ package com.stays.hotelmanagement.repository;
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.entities.Hotel;
 import com.stays.hotelmanagement.entities.Room;
+import com.stays.hotelmanagement.transactionalObject.SearchResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -31,9 +32,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     /*public List<Booking> findAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);*/
     public List<Booking> findAllByBookedFromDateGreaterThanEqualAndAndBookedToDateLessThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
 
-
-    //public List<Hotel> findbyLocationDateRangeRoomStatusBooked(String location, LocalDate fromDate, LocalDate toDate, String roomStatus);
-    Optional<Booking> findByBookingId(Integer bookingId);
+   Optional<Booking> findByBookingId(Integer bookingId);
     Boolean existsByBookingId(Integer bookingId);
     void deleteByBookingId(Integer bookingId);
 }
