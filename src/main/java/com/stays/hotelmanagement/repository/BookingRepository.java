@@ -1,6 +1,7 @@
 package com.stays.hotelmanagement.repository;
 
 import com.stays.hotelmanagement.entities.Booking;
+import com.stays.hotelmanagement.entities.BookingIdentity;
 import com.stays.hotelmanagement.entities.Hotel;
 import com.stays.hotelmanagement.entities.Room;
 import com.stays.hotelmanagement.transactionalObject.SearchResult;
@@ -13,28 +14,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BookingRepository extends JpaRepository<Booking, Integer> {
+public interface BookingRepository extends JpaRepository<Booking, BookingIdentity> {
 
     //Search Functions
+    public List<Booking> findAllBookingDetailsByBookingId(int bookingId);
     public List<Booking> findAllBookingDetailsByUserId(int userId);
     public List<Booking> findAllBookingDetailsByHotelId(int hotelId);
     public List<Booking> findAllBookingDetailsByRoomId(int roomId);
     public List<Booking> findAllBookingDetailsByUserName(String userName);
     public List<Booking> findAllBookingDetailsByBookedBy(String BookedBy);
-    //    public Booking findBookingDetailsByPaymentSet(String paymentId);
     public List<Booking> findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
 
     //Delete Functions
-//    public String deleteAllBookingDetailsByUserId(String userId);
-    public String deleteAllBookingDetailsByHotelId(String hotelId);
-    public String deleteAllBookingDetailsByRoomId(String roomId);
-    public String deleteBookingDetailsByPaymentSet(String paymentId);
-    public String deleteAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);
+    public List<Booking> deleteAllBookingDetailsByBookingId(int bookingId);
 
-    /*public List<Booking> findAllBookingDetailsByBookedByBetween(LocalDate bookedFromDate, LocalDate bookedToDate);*/
-    public List<Booking> findAllByBookedFromDateGreaterThanEqualAndAndBookedToDateLessThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
-
-   Optional<Booking> findByBookingId(Integer bookingId);
-    Boolean existsByBookingId(Integer bookingId);
-    void deleteByBookingId(Integer bookingId);
 }

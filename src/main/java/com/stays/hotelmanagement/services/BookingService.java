@@ -1,20 +1,18 @@
 package com.stays.hotelmanagement.services;
 
-import com.stays.hotelmanagement.controllers.BookingController;
-import com.stays.hotelmanagement.controllers.UserController;
 import com.stays.hotelmanagement.entities.Booking;
+import com.stays.hotelmanagement.entities.BookingIdentity;
 import com.stays.hotelmanagement.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resources;
+;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @Service
 public class BookingService {
@@ -27,11 +25,18 @@ public class BookingService {
         return this.bookingRepository.findAll();
     }
 
+    //Add for BookingId
     //Find Booking details by BookingId
-    public Booking getBookingById(int bookingId){
+    public List<Booking> getBookingById(int bookingId){
+        return this.bookingRepository.findAllBookingDetailsByBookingId(bookingId);
+    }
+
+    //Find Booking details by Primary key <Added to accommodate composite key>
+    public Booking getBookingByPrimaryId(int bookingId, int roomId){
 
         Booking bookingFoundById = new Booking();
-        Optional<Booking> booking = this.bookingRepository.findById(bookingId);
+//        Changed to accommodate composite key
+        Optional<Booking> booking = this.bookingRepository.findById(new BookingIdentity(bookingId, roomId));
         if(booking.isPresent()) {
             bookingFoundById = booking.get();
         }
@@ -48,21 +53,38 @@ public class BookingService {
         return this.bookingRepository.save(booking);
     }
 
-    //Delete a booking using  booking Id.
-    public Optional<Booking> deleteBookingById(int bookingId){
-        boolean isBookingAvailable=this.bookingRepository.existsById(bookingId);
+    //Delete a booking using primary Id.
+    //Changed to accommodate composite key
+    public Optional<Booking> deleteBookingByPrimaryId(int bookingId, int roomId){
+        boolean isBookingAvailable=this.bookingRepository.existsById(new BookingIdentity(bookingId, roomId));
         Optional<Booking> bookingToBeDeleted = Optional.of(new Booking());
         if(isBookingAvailable){
-            bookingToBeDeleted = this.bookingRepository.findById(bookingId);
-            this.bookingRepository.deleteById(bookingId);
+            bookingToBeDeleted = this.bookingRepository.findById(new BookingIdentity(bookingId, roomId));
+            this.bookingRepository.deleteById(new BookingIdentity(bookingId, roomId));
         }
         return bookingToBeDeleted;
     }
 
+    //Delete a booking using booking Id.
+    //Add to accommodate composite key
+    @Transactional
+    public List<Booking> deleteAllBookingByBookingId(int bookingId){
+        List<Booking> bookingList = new ArrayList<>();
+//        List<Booking> bookingList = Collections.<Booking>emptyList();
+        List<Booking> bookingToBeDeleted = this.bookingRepository.findAllBookingDetailsByBookingId(bookingId);
+
+        if(bookingToBeDeleted.size()!=0){
+            this.bookingRepository.deleteAllBookingDetailsByBookingId(bookingId);
+            bookingList = bookingToBeDeleted;
+        }
+        return bookingList;
+    }
+
     //Delete a booking
+    //Changed to accommodate composite key
     public Booking deleteBooking(Booking existingBooking){
         Booking deletedBooking = new Booking();
-        Boolean isBookingAvailable=this.bookingRepository.existsById(existingBooking.getBookingId());
+        Boolean isBookingAvailable=this.bookingRepository.existsById(new BookingIdentity(existingBooking.getBookingId(), existingBooking.getRoomId()));
         if(isBookingAvailable){
             this.bookingRepository.delete(existingBooking);
             deletedBooking = existingBooking;
@@ -95,8 +117,4 @@ public class BookingService {
         return this.bookingRepository.findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(bookedFromDate, bookedToDate);
     }
 
-    /*//Find Booking details by paymentId
-    public Booking findBookingByPaymentId(String paymentId){
-        return this.bookingRepository.findBookingDetailsByPaymentSet(paymentId);
-    }*/
 }

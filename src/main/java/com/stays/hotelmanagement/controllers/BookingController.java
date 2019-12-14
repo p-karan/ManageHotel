@@ -27,8 +27,14 @@ public class BookingController {
 
     //Find Booking details by BookingId
     @GetMapping(value = "/booking/{bookingId}")
-    public Booking getBookingById(@PathVariable("bookingId") int bookingId){
+    public List<Booking> getBookingByBookingId(@PathVariable("bookingId") int bookingId){
         return this.bookingService.getBookingById(bookingId);
+    }
+
+    //Find Booking details by PrimaryKey
+    @GetMapping(value = "/booking/primaryKey/{bookingId}/{roomId}")
+    public Booking getBookingByPrimaryId(@PathVariable("bookingId") int bookingId, @PathVariable("roomId") int roomId){
+        return this.bookingService.getBookingByPrimaryId(bookingId, roomId);
     }
 
     //Add a Booking
@@ -43,16 +49,23 @@ public class BookingController {
         return this.bookingService.addBooking(booking);
     }
 
-    //Delete a booking using  booking Id.
-    @DeleteMapping(value="/booking/{bookingId}")
-    public Optional<Booking> deleteBookingById(@PathVariable("bookingId") int bookingId){
-        return this.bookingService.deleteBookingById(bookingId);
-    }
 
     //Delete a booking
     @DeleteMapping(value="/booking", produces = "application/json", consumes = "application/json")
     public Booking deleteBooking(@RequestBody Booking existingBooking){
         return this.bookingService.deleteBooking(existingBooking);
+    }
+
+    //Delete a booking using primary Key.
+    @DeleteMapping(value="/booking/primaryKey/{bookingId}/{roomId}")
+    public Optional<Booking> deleteBookingByPrimaryId(@PathVariable("bookingId") int bookingId, @PathVariable("roomId") int roomId){
+        return this.bookingService.deleteBookingByPrimaryId(bookingId, roomId);
+    }
+
+    //Delete a booking using booking Id.
+    @DeleteMapping(value="/booking/{bookingId}")
+    public List<Booking> deleteBookingByBookingId(@PathVariable("bookingId") int bookingId){
+        return this.bookingService.deleteAllBookingByBookingId(bookingId);
     }
 
     //Find Booking details by HotelId

@@ -19,6 +19,9 @@ public class Payment {
     @Column(length=6)
     private int paymentId;
 
+    /*@Column(nullable = false, length = 6)
+    private int bookingId;*/
+
     @Column(nullable = false, length=40)
     private String payStatus;
 
