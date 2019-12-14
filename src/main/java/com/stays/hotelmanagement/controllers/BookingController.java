@@ -99,8 +99,8 @@ public class BookingController {
     //Find Booking details between bookingFromDate and bookingToDate
     @GetMapping(value = "/booking/date/{bookFrom}/{bookTo}")
     public List<Booking> getAllBookingByDateRange(
-            @PathVariable("bookFrom") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate bookedFromDate,
-            @PathVariable("bookTo") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate bookedToDate){
+            @PathVariable("bookFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookedFromDate,
+            @PathVariable("bookTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookedToDate){
 
         return this.bookingService.findBookingByDateRange(bookedFromDate, bookedToDate);
     }
