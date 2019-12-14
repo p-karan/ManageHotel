@@ -40,11 +40,7 @@ public class Hotel{
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
     private int discount;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private HotelStatus hotelOperationalStatus;
+    @Column(nullable = false, length = 5)
+    private String hotelOperationalStatus;
 
-    public enum HotelStatus {
-        OPEN, CLOSED
-    }
 }
