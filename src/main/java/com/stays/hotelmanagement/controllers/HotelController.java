@@ -60,8 +60,8 @@ public class HotelController {
     }
     @GetMapping(value = "/hotel/{city}/{fromDate}/{toDate}")
     public List<SearchResult> getHotelSearchList(@PathVariable("city") String city,
-                                                 @PathVariable("fromDate")  @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate fromDate,
-                                                 @PathVariable("toDate") @DateTimeFormat(pattern = "dd-MMM-yyyy") LocalDate toDate){
+                                                 @PathVariable("fromDate")  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fromDate,
+                                                 @PathVariable("toDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate toDate){
 
         return this.hotelServices.findHotelByCityDateAndRoomType(city, fromDate, toDate);
     }

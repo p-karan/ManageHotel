@@ -3,12 +3,10 @@ package com.stays.hotelmanagement.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -16,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name="HBMS_BOOKING_DETAILS")
+@IdClass(BookingIdentity.class)
 public class Booking {
 
     @Id
@@ -65,5 +64,6 @@ public class Booking {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="bookingId", nullable = false)
+    @JoinColumn(name="roomId", nullable = false)
     private Set<Payment> paymentSet;
 }
