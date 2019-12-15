@@ -23,7 +23,7 @@ public class Hotel{
 
     @Embedded
     @Column(nullable = false)
-    private Address address;
+    private Address addresses;
 
 
 /*    @OneToMany(cascade = CascadeType.ALL)
