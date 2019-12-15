@@ -12,6 +12,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin(value="*")
 public class HotelController {
 
     @Autowired
