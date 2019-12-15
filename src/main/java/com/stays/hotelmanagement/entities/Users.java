@@ -26,15 +26,18 @@ public class Users {
     @Column(nullable = false , length=15)
     private String password;
 
-    @Column(nullable = false, length=80)
-    private String fullName;
+    @Column(nullable = false, length=20)
+    private String firstName;
+
+    @Column(nullable = true, length=20)
+    private String middleName;
+
+    @Column(nullable = false, length=20)
+    private String lastName;
 
     @Column(nullable = false, length=20)
     @Enumerated(EnumType.STRING)
     private Roles role;
-
-    @Column(length=40)
-    private String workLocation;
 
     @Embedded
     private Address addresses;
