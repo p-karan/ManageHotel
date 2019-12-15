@@ -30,6 +30,5 @@ public class Room {
     @Column(nullable = false, length = 400)
     private String roomDescription;
 
-
 }
 
