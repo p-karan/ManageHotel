@@ -2,6 +2,7 @@ package com.stays.hotelmanagement.services;
 
 import com.stays.hotelmanagement.entities.Room;
 import com.stays.hotelmanagement.repository.RoomRepository;
+import com.stays.hotelmanagement.transactionalObject.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,11 @@ public class RoomServices {
             roomDeletedById = room.get();
         }
         return roomDeletedById;
+    }
+
+    // Find all Room by City and Room Type
+    public List<SearchResult> findAllRoomsByCityRoomType(){
+        return this.roomRepository.findAllByCityRoomType();
     }
 }
 

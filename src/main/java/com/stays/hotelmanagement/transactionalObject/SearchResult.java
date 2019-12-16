@@ -33,11 +33,12 @@ public class SearchResult {
     private String primaryPhone;
     private String secondaryPhone;
 
- /*   public SearchResult(int roomId, int hotelId, String roomType) {
-        this.roomId = roomId;
-        this.hotelId = hotelId;
+    public SearchResult(String roomType, double ratePerNight, String roomDescription, String addressCity) {
         this.roomType = roomType;
-    }*/
+        this.ratePerNight = ratePerNight;
+        this.roomDescription = roomDescription;
+        this.addressCity = addressCity;
+    }
 
    /* public SearchResult(int roomId, int hotelId, String addressCity, String roomType) {
         this.roomId = roomId;

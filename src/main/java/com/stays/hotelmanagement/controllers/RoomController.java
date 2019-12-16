@@ -4,6 +4,7 @@ import com.stays.hotelmanagement.entities.Hotel;
 import com.stays.hotelmanagement.entities.Room;
 import com.stays.hotelmanagement.services.HotelServices;
 import com.stays.hotelmanagement.services.RoomServices;
+import com.stays.hotelmanagement.transactionalObject.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -56,5 +57,13 @@ public class RoomController {
 
         return this.roomServices.sortBy(propName);
     }
+
+    // Find all Room by City and Room Type
+    @GetMapping(value = "/room/roomType")
+    public List<SearchResult> findAllRoomsByCityRoomType(){
+        return this.roomServices.findAllRoomsByCityRoomType();
+    }
+
+
 }
 
