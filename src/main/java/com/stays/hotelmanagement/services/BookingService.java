@@ -3,6 +3,7 @@ package com.stays.hotelmanagement.services;
 import com.stays.hotelmanagement.entities.Booking;
 import com.stays.hotelmanagement.entities.BookingIdentity;
 import com.stays.hotelmanagement.repository.BookingRepository;
+import com.stays.hotelmanagement.transactionalObject.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 ;
 import org.springframework.stereotype.Service;
@@ -116,5 +117,4 @@ public class BookingService {
     public List<Booking> findBookingByDateRange(LocalDate bookedFromDate, LocalDate bookedToDate){
         return this.bookingRepository.findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(bookedFromDate, bookedToDate);
     }
-
 }
