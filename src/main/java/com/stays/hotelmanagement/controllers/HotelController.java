@@ -67,5 +67,4 @@ public class HotelController {
         return this.hotelServices.findHotelByCityDateAndRoomType(city, fromDate, toDate);
     }
 
-
 }

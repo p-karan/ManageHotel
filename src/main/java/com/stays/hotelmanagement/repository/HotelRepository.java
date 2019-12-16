@@ -25,5 +25,5 @@ public interface HotelRepository extends JpaRepository<Hotel,Integer> {
             "on b.roomId = r.roomId and b.bookedFromDate <?3 and b.bookedToDate > ?2)")
     public List<SearchResult> findByCityDateRangeRoomType(String location, LocalDate fromDate, LocalDate toDate);
 
-
 }
+
