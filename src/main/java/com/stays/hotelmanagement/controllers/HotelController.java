@@ -67,4 +67,8 @@ public class HotelController {
         return this.hotelServices.findHotelByCityDateAndRoomType(city, fromDate, toDate);
     }
 
+    @GetMapping(value="/hotel/{city}")
+    public List<Hotel> findAllByAddresses_AddressCity(@PathVariable("city") String city){
+        return this.hotelServices.findAllByAddresses_AddressCity(city);
+    }
 }
