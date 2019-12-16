@@ -2,6 +2,7 @@ package com.stays.hotelmanagement.controllers;
 
 import com.stays.hotelmanagement.entities.Hotel;
 import com.stays.hotelmanagement.services.HotelServices;
+import com.stays.hotelmanagement.services.MailUtilityService;
 import com.stays.hotelmanagement.transactionalObject.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +19,12 @@ public class HotelController {
     @Autowired
     private HotelServices hotelServices;
 
+    @Autowired
+    private Hotel hotel;
+
+    @Autowired
+    private MailUtilityService mailUtilityService;
+
     @GetMapping(value = "/hotel")
     public List<Hotel> getHotel(){
 
@@ -27,14 +34,24 @@ public class HotelController {
     //Add Hotel
     @PostMapping(value = "/hotel", produces = "application/json", consumes = "application/json")
     public Hotel add(@RequestBody Hotel hotel){
-
-        return this.hotelServices.addHotel(hotel);
+        String message = "Hotel Added successfully";
+        hotel= this.hotelServices.addHotel(hotel);
+        if (hotel != null)
+        {
+              mailUtilityService.sendMail(message);
+        }
+        return hotel;
     }
 
     @PutMapping(value = "/hotel", produces = "application/json", consumes = "application/json")
     public Hotel update(@RequestBody Hotel hotel){
-
-        return this.hotelServices.updateHotel(hotel);
+        String message = "Hotel Updated successfully";
+        hotel = this.hotelServices.updateHotel(hotel);
+        if (hotel != null)
+        {
+            mailUtilityService.sendMail(message);
+        }
+        return hotel;
     }
 
     @GetMapping(value = "/hotel/hotelId/{id}")

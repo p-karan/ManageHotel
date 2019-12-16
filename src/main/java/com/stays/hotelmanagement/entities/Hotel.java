@@ -1,12 +1,15 @@
 package com.stays.hotelmanagement.entities;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.Set;
 
 
 @Entity
+@Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

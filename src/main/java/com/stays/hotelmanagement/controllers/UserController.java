@@ -1,6 +1,7 @@
 package com.stays.hotelmanagement.controllers;
 
 import com.stays.hotelmanagement.entities.Users;
+import com.stays.hotelmanagement.services.MailUtilityService;
 import com.stays.hotelmanagement.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,22 @@ public class UserController {
     @Autowired
     private UserServices userService;
 
+    @Autowired
+    private MailUtilityService mailUtilityService;
+
+    @Autowired
+    private Users user;
+
     //Add a new User
     @PostMapping(value = "/user", produces = "application/json", consumes = "application/json")
-    public Users addUser(@RequestBody Users newUser) {
-        return this.userService.addUser(newUser);
+    public Users addUser(@RequestBody Users newUser)
+    {
+        String message = "User Added successfully";
+        user = this.userService.addUser(newUser);
+        if (user != null){
+            mailUtilityService.sendMail(message);
+        }
+        return user;
     }
 
     //Update an existing User
