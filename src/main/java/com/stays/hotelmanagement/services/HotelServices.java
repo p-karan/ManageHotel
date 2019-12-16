@@ -69,4 +69,8 @@ public class HotelServices {
         return this.hotelRepository.findByCityDateRangeRoomType(location, fromDate, toDate);
     }
 
+    public List<Hotel> findAllByAddresses_AddressCity(String city){
+        return this.hotelRepository.findAllByAddresses_AddressCity(city);
+    }
+
 }
