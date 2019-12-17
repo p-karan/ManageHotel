@@ -25,10 +25,10 @@ public class UserController {
     @PostMapping(value = "/user", produces = "application/json", consumes = "application/json")
     public Users addUser(@RequestBody Users newUser)
     {
-        String message = "User Added successfully";
+        String message = "User " +newUser.getUserName()+ " Added successfully";
         user = this.userService.addUser(newUser);
         if (user != null){
-            mailUtilityService.sendMail(message);
+            mailUtilityService.sendMailUser(message,newUser.getAddresses().getEmail());
         }
         return user;
     }
@@ -36,7 +36,12 @@ public class UserController {
     //Update an existing User
     @PutMapping(value = "/user", produces = "application/json", consumes = "application/json")
     public Users updateUser(@RequestBody Users existingUser) {
-        return this.userService.updateUser(existingUser);
+        String message = "User " +existingUser.getUserName()+ " Updated successfully";
+        user = this.userService.updateUser(existingUser);
+        if (user != null){
+            mailUtilityService.sendMailUser(message,existingUser.getAddresses().getEmail());
+        }
+        return user;
     }
 
     //Find All Users
