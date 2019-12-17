@@ -29,4 +29,20 @@ public class MailUtilityService {
         sender.send(message);
         return "Mail Sent Success!";
     }
+
+    public String sendMailUser(String notification, String emailId) {
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        try {
+            helper.setTo(emailId);
+            helper.setText(notification);
+            helper.setSubject("Alert From Stays.Com");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return "Error while sending mail ..";
+        }
+        sender.send(message);
+        return "Mail Sent Success!";
+    }
 }
