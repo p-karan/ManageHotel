@@ -3,6 +3,7 @@ package com.stays.hotelmanagement.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Component
 @Table(name="HBMS_BOOKING_DETAILS")
 /*@IdClass(BookingIdentity.class)*/
 public class Booking {

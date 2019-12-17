@@ -1,7 +1,9 @@
 package com.stays.hotelmanagement.controllers;
 
 import com.stays.hotelmanagement.entities.Booking;
+import com.stays.hotelmanagement.entities.Users;
 import com.stays.hotelmanagement.services.BookingService;
+import com.stays.hotelmanagement.services.MailUtilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.Resources;
@@ -19,6 +21,12 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private MailUtilityService mailUtilityService;
+
+    @Autowired
+    private Booking bookings;
 
     //Find all Booking details
     @GetMapping(value="/booking")
@@ -41,7 +49,12 @@ public class BookingController {
     //Add a Booking
     @PostMapping(value = "/booking", produces = "application/json", consumes = "application/json")
     public Booking addBooking(@RequestBody Booking booking){
-        return this.bookingService.addBooking(booking);
+        String message = "Thank you for choosing Stays.com, your booking is confirmed!";
+        bookings = this.bookingService.addBooking(booking);
+        if(bookings != null){
+            mailUtilityService.sendMail(message);
+        }
+        return bookings;
     }
 
     //Update a Booking record
