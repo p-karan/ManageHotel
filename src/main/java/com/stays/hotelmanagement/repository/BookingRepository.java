@@ -24,6 +24,7 @@ public interface BookingRepository extends JpaRepository<Booking, BookingIdentit
     public List<Booking> findAllBookingDetailsByUserName(String userName);
     public List<Booking> findAllBookingDetailsByBookedBy(String BookedBy);
     public List<Booking> findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
+    public List<Booking> findAllBookingDetailsByBookedFromDateLessThanEqualAndBookedToDateGreaterThanEqual(LocalDate bookedFromDate, LocalDate bookedToDate);
 
     //Delete Functions
     public List<Booking> deleteAllBookingDetailsByBookingId(int bookingId);

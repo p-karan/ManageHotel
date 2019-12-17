@@ -117,4 +117,9 @@ public class BookingService {
     public List<Booking> findBookingByDateRange(LocalDate bookedFromDate, LocalDate bookedToDate){
         return this.bookingRepository.findAllByBookedFromDateGreaterThanEqualAndBookedToDateLessThanEqual(bookedFromDate, bookedToDate);
     }
+
+    //Find Booking details for a specific Date
+    public List<Booking> findAllBookingBySpecificDate(LocalDate bookedFromDate, LocalDate bookedToDate){
+        return this.bookingRepository.findAllBookingDetailsByBookedFromDateLessThanEqualAndBookedToDateGreaterThanEqual(bookedFromDate, bookedToDate);
+    }
 }
