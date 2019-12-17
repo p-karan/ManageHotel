@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name="HBMS_BOOKING_DETAILS")
-@IdClass(BookingIdentity.class)
+/*@IdClass(BookingIdentity.class)*/
 public class Booking {
 
     @Id
@@ -62,8 +62,10 @@ public class Booking {
     @Column(nullable = false, length=40)
     private String userName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+/*    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="bookingId", nullable = false)
     @JoinColumn(name="roomId", nullable = false)
-    private Set<Payment> paymentSet;
+    private Set<Payment> paymentSet;*/
+    @Column(nullable = false, length=10)
+    private String payMode;
 }
