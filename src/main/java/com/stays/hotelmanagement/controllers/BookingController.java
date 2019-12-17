@@ -106,4 +106,12 @@ public class BookingController {
         return this.bookingService.findBookingByDateRange(bookedFromDate, bookedToDate);
     }
 
+    //Find Booking details for a specific Date
+    @GetMapping(value = "/booking/specificDate/{bookFrom}/{bookTo}")
+    public List<Booking> findAllBookingByDate(
+            @PathVariable("bookFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookedFromDate,
+            @PathVariable("bookTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookedToDate){
+
+        return this.bookingService.findAllBookingBySpecificDate(bookedFromDate, bookedToDate);
+    }
 }
