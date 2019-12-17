@@ -28,5 +28,7 @@ public interface HotelRepository extends JpaRepository<Hotel,Integer> {
 
     public List<Hotel> findAllByAddresses_AddressCity(String city);
 
+    public Hotel findByAddresses_AddressCityAndHotelName(String city, String hotelName);
+
 }
 

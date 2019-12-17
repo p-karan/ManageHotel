@@ -60,6 +60,11 @@ public class HotelController {
         return this.hotelServices.findById(id);
     }
 
+    @GetMapping(value="/hotel/city/Name/{city}/{hotelName}")
+    public Hotel findByCityAndName(@PathVariable("city") String city, @PathVariable("hotelName") String hotelName){
+        return this.hotelServices.findAllHotelByNameanCity(city, hotelName);
+    }
+
     @DeleteMapping(value = "/hotel/{id}", produces = "application/json")
     public Hotel deleteHotelById(@PathVariable("id") int id){
         return this.hotelServices.deleteHotelById(id);

@@ -50,6 +50,10 @@ public class HotelServices {
         return hotelFoundById;
     }
 
+    public Hotel findAllHotelByNameanCity(String city, String hotelName){
+        return this.hotelRepository.findByAddresses_AddressCityAndHotelName(city, hotelName);
+    }
+
     public Hotel deleteHotel(Hotel hotel){
         this.hotelRepository.delete(hotel);
         return hotel;
