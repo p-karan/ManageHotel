@@ -39,11 +39,11 @@ public class Hotel{
     @Column(nullable = false, length = 400)
     private String hotelDescription;
 
-
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0",length = 2)
     private int discount;
 
     @Column(nullable = false, length = 5)
     private String hotelOperationalStatus;
+
 
 }
